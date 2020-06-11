@@ -18,9 +18,15 @@
     <ClCompile Include="main.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="EDD\Lista_Doble_Enlazada_Circular.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="EDD\Lista_Doble_Enlazada_Circular.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
