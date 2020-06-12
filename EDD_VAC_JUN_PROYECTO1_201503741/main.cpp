@@ -1,11 +1,22 @@
 #include "main.h"
+#include "EDD\Lista_Doble_Enlazada_Circular.cpp"
+#include "Transaccion.h"
+
 
 #include <iostream>
 #include <string>
 using namespace std;
 
 int main() {
-	IniciarSesion();
+	//IniciarSesion();
+	Lista_Doble_Enlazada_Circular<Transaccion*> *Lista = new Lista_Doble_Enlazada_Circular <Transaccion*>();
+	Transaccion *t1 = new Transaccion("activo1", "uset1", "Guate", "maxi", "04/06/2020", "2 dias");
+	Lista->add_last(t1);
+	Transaccion *t2 = new Transaccion("activo2", "uset1", "Guate", "maxi", "05/06/2020", "7 dias");
+	Lista->add_last(t2);
+	Transaccion *t3 = new Transaccion("activo3", "uset1", "Guate", "maxi", "10/06/2020", "1 dias");
+	Lista->add_last(t3);
+	Lista->graph();
 	return 0;
 }
 

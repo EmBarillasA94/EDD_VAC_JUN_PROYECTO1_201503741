@@ -30,15 +30,15 @@ public:
 	void setNext(Node *n) {
 		next = n;
 	}
-	
+
 	void setBefore(Node *n) {
 		before = n;
 	}
 
 private:
-	T data;
-	Node *next;
-	Node *before;
+	T data = 0;
+	Node *next = 0;
+	Node *before = 0;
 };
 
 template <class T>
@@ -50,12 +50,12 @@ public:
 	int getSize();
 	void add_firts(T data_);
 	void add_last(T data_);
-	void eliminiar(String id_);
+	void eliminiar(string id_);
 	void graph();
 
 private:
-	Node *first;
-	Node *last;
+	Node<T> *firts;
+	Node<T> *last;
 	int size;
 };
 

@@ -18,7 +18,20 @@ public:
 		this->fecha = fecha_;
 		this->tiempo = tiempo_;
 	}
+	
 	string GenerarId(int length);
+	
+	//getters and setters 
+	string getInfo() {
+		string texto = "Id Transaccion: "+this->id_Transaccion + "\\l" 
+			+ "Id Activo: " + this->id_Activo + "\\l" 
+			+ "Usuario: "+ this->usuario + "\\l" 
+			+ "Departamento: "+ this->depto + "\\l" 
+			+ "Empresa: "+ this->empresa + "\\l" 
+			+ "Fecha: "+ this->fecha + "\\l" 
+			+ "Tiempo Rentado: " + this->tiempo + "\\l";
+		return texto;
+	}
 
 private:
 	string id_Transaccion;//se genera automaticamente

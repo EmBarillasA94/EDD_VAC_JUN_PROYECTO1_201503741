@@ -1,9 +1,10 @@
 #include "Lista_Doble_Enlazada_Circular.h"
+#include <fstream>
 
 template<class T>
 inline Lista_Doble_Enlazada_Circular<T>::Lista_Doble_Enlazada_Circular()
 {
-	this->first = 0;
+	this->firts = 0;
 	this->last = 0;
 	this->size = 0;
 }
@@ -23,21 +24,22 @@ int Lista_Doble_Enlazada_Circular<T>::getSize()
 template<class T>
 void Lista_Doble_Enlazada_Circular<T>::add_firts(T data_)
 {
-	Node *n = new Node(data_);
+	Node<T> *n = new Node<T>(data_);
 	if (isEmpty())
 	{
-		this->first = n;
-		this->first->setBefore(this->last);
-		this->last->setNext(this->first);
+		this->firts = n;
+		this->last = n;
+		this->firts->setBefore(this->last);
+		this->last->setNext(this->firts);
 		this->size++;
 	}
 	else
 	{
-		n->setNext(this->first);
-		this->first->setBefore(n);
-		this->first = n;
-		this->last->setNext(this->first);
-		this->first->setBefore(this->last);
+		n->setNext(this->firts);
+		this->firts->setBefore(n);
+		this->firts = n;
+		this->last->setNext(this->firts);
+		this->firts->setBefore(this->last);
 		this->size++;
 	}
 }
@@ -45,13 +47,13 @@ void Lista_Doble_Enlazada_Circular<T>::add_firts(T data_)
 template<class T>
 void Lista_Doble_Enlazada_Circular<T>::add_last(T data_)
 {
-	Node *n = new Node(data_)
 	if (isEmpty())
 	{
-		add_firts();
+		add_firts(data_);
 	}
 	else
 	{
+		Node<T> *n = new Node<T>(data_);
 		n->setBefore(this->last);
 		this->last->setNext(n);
 		this->last = n;
@@ -62,18 +64,18 @@ void Lista_Doble_Enlazada_Circular<T>::add_last(T data_)
 }
 
 template<class T>
-void Lista_Doble_Enlazada_Circular<T>::eliminiar(String id_)
+void Lista_Doble_Enlazada_Circular<T>::eliminiar(string id_)
 {
-	Node *aux = this->first;
+	Node<T> *aux = this->firts;
 	for (int i = 0; i < this->size; i++)
 	{
 		if (id_ == aux->getData())
 		{
 			if (i ==0)
 			{
-				this->first = aux->getNext();
-				this->last->setNext(this->first);
-				this->first->setBefore(this->last);
+				this->firts = aux->getNext();
+				this->last->setNext(this->firts);
+				this->firts->setBefore(this->last);
 				this->size--;
 				cout << "Eliminado: " << aux->getData();
 				delete aux;
@@ -82,8 +84,8 @@ void Lista_Doble_Enlazada_Circular<T>::eliminiar(String id_)
 			else if (i == this->size - 1)
 			{
 				this->last = aux->getBefore();
-				this->first->setBefore(this->last);
-				this->last->setNext(this->first);
+				this->firts->setBefore(this->last);
+				this->last->setNext(this->firts);
 				this->size--;
 				cout << "Eliminado " << aux->getData();
 				delete aux;
@@ -106,13 +108,20 @@ void Lista_Doble_Enlazada_Circular<T>::eliminiar(String id_)
 template<class T>
 void Lista_Doble_Enlazada_Circular<T>::graph()
 {
-	Node *aux = this->firts;
+	Node<T> *aux = this->firts;
 	ofstream file;
 	char comillas = '"';
 	file.open("C:\\Users\\EDDY\\Desktop\\Lista_Enlazada_Circular.txt");
 	file << "digraph G { \n";
 	file << "rankdir = LR \n";
 	file << "node[shape = box] \n";
+
+	for (int i = 0; i < this->size; i++)
+	{
+		file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "]" << endl;
+		aux = aux->getNext();
+	}
+	aux = this->firts;
 	for (int i = 0; i < this->size; i++)
 	{
 		file << comillas << aux->getData() << comillas << " -> " << comillas << aux->getNext()->getData() << comillas << "\n";
