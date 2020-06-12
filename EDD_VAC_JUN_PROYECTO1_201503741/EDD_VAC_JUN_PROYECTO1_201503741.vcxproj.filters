@@ -29,5 +29,8 @@
     <ClInclude Include="EDD\Lista_Doble_Enlazada_Circular.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Transaccion.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
