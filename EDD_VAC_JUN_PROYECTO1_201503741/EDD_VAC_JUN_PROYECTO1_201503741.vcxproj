@@ -111,10 +111,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EDD\Lista_Doble_Enlazada_Circular.cpp" />
+    <ClCompile Include="EDD\Matriz_Dispersa.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EDD\Lista_Doble_Enlazada_Circular.h" />
+    <ClInclude Include="EDD\Matriz_Dispersa.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Transaccion.h" />
   </ItemGroup>
