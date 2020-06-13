@@ -7,10 +7,12 @@ using namespace std;
 class Usuario
 {
 public:
-	Usuario(string usuario_, string nombre_, string contrasenia_) {
+	Usuario(string usuario_, string nombre_, string contrasenia_, string depto_, string empresa_) {
 		this->usuario = usuario_;
 		this->nombre = nombre_;
 		this->contrasenia = contrasenia_;
+		this->depto = depto_;
+		this->empresa = empresa_;
 	}
 	//set and get
 	string getUsuario() {
@@ -22,11 +24,18 @@ public:
 	string getContrasenia() {
 		return this->contrasenia;
 	}
-
+	string getEmpresa() {
+		return this->empresa;
+	}
+	string getDepto() {
+		return this->depto;
+	}
 private:
 	string usuario;
 	string nombre;
 	string contrasenia;
+	string depto;
+	string empresa;
 	//arbol avl
 };
 
