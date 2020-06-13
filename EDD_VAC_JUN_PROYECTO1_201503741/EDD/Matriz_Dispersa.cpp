@@ -3,7 +3,7 @@
 template<class T>
 inline Matriz_Dispersa<T>::Matriz_Dispersa()
 {
-	this->root = new Node_Cabecera<T>("root");
+	this->root = new Node<T>("root");
 }
 
 template<class T>
