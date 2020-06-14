@@ -225,19 +225,19 @@ void Matriz_Dispersa<N>::graph()
 		{
 			if (auxC->getData()->getUsuario() == "cabecera" || auxC->getData()->getUsuario() == "root")
 			{
-				file << comillas << auxC->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxC->getData()->getNombre() << comillas << ", group = " << grupo << " ]; \n";
+				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getNombre() << comillas << ", group = " << grupo << " ]; \n";
 				auxC = auxC->getSiguiente();
 			}
 			else
 			{
-				file << comillas << auxC->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxC->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
+				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
 				if (auxC != 0)
 				{
 					NodeMatriz<N> *auxZ = auxC;
 					while (auxZ->getAtras() != 0)
 					{
 						auxZ = auxZ->getAtras();
-						file << comillas << auxZ->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxZ->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
+						file << comillas << auxZ->getData() << comillas << "[ shape = box3d, label = " << comillas << auxZ->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
 					}
 				}
 				auxC = auxC->getSiguiente();

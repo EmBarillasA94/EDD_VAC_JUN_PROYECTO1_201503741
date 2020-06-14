@@ -33,7 +33,9 @@ public:
 	string getInfo() {
 		string texto = this->usuario + "\\l"
 			+ this->nombre + "\\l"
-			+ this->contrasenia + "\\l";
+			+ this->contrasenia + "\\l"
+			+ this->empresa + "\\l"
+			+ this->depto + "\\l";
 		return texto;
 	}
 private:
