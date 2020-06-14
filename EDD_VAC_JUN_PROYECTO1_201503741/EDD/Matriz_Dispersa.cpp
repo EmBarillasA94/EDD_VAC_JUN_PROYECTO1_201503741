@@ -1,9 +1,10 @@
 #include "Matriz_Dispersa.h"
+#include "Usuario.h"
 
 template<class T>
-inline Matriz_Dispersa<T>::Matriz_Dispersa()
+Matriz_Dispersa<T>::Matriz_Dispersa(T data_, string fila_, string columna_)
 {
-	this->root = new Node<T>("root");
+	this->root = new Node<T>(data_, fila_, columna_);
 }
 
 template<class T>
@@ -15,6 +16,14 @@ void Matriz_Dispersa<T>::Insertar_elemento(T data_, string fila_, string columna
 	//Evaluar condiciones
 	if (fila == 0 && columna == 0)//si la fila y la columna no existen
 	{
+		//crear la fila y columna
+		Usuario *n_fila = new Usuario(fila_, fila_, fila_, fila_, fila_);
+		fila = new Node<T>(n_fila, fila_, "-1");
+		Usuario *n_Columna = new Usuario(columna_, columna_, columna_, columna_, columan_);
+		columna = new Node<T>(n_columna, "-1", columna_);
+		//enlazar la fila nueva y la columna nueva
+		Insertar_fila(fila);
+		Insertar_Columna(columna);
 
 	}
 	else if (fila != 0 && columna == 0)//si la fila si existe pero la columna no existe
@@ -59,4 +68,28 @@ Node<T>* Matriz_Dispersa<T>::Buscar_columna(string columna_)
 		aux = aux->getSiguiente();
 	}
 	return 0;
+}
+
+template<class T>
+void Matriz_Dispersa<T>::Insertar_fila(Node<T>* fila_nueva_)
+{
+	Node<T> *aux = this->root;
+	while (aux->getAbajo() != 0) 
+	{
+		aux = aux->getAbajo();
+	}
+	aux->setAbajo(fila_nueva_);
+	fila_nueva_->setArriba(aux);
+}
+
+template<class T>
+void Matriz_Dispersa<T>::Insertar_Columna(Node<T>* columna_nueva_)
+{
+	Node<T> *aux = this->root;
+	while (aux->getSiguiente() != 0) 
+	{
+		aux = aux->getSiguiente();
+	}
+	aux->setSiguiente(columna_nueva_);
+	columna_nueva_->setAnterior(aux);
 }

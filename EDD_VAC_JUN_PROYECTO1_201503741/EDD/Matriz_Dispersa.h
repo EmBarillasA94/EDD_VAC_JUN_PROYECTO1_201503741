@@ -83,15 +83,16 @@ template<class T>
 class Matriz_Dispersa
 {
 public:
-	Matriz_Dispersa();
+	Matriz_Dispersa(T data_, string fila_, string columna_);
 	void Insertar_elemento(T data_, string fila_, string columna_);
 	Node<T> *Buscar_fila(string fila_);
 	Node<T> *Buscar_columna(string columna_);
-
+	void Insertar_fila(Node<T> *fila_nueva_);
+	void Insertar_Columna(Node<T> *columna_nueva_);
+	void Insertar_Data(Node<T> *fila_, Node<T> *columna_, Node<T> *data_)
 private:
 	Node<T> root;
 };
-
 
 #endif // !MATRIZ_DISPERSA_H
 
