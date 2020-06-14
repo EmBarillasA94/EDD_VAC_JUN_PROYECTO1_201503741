@@ -225,7 +225,7 @@ void Matriz_Dispersa<N>::graph()
 		{
 			if (auxC->getData()->getUsuario() == "cabecera" || auxC->getData()->getUsuario() == "root")
 			{
-				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getNombre() << comillas << ", group = " << grupo << " ]; \n";
+				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getNombre() << comillas << ", color=red, group = " << grupo << " ]; \n";
 				auxC = auxC->getSiguiente();
 			}
 			else
