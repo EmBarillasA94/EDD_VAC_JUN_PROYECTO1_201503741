@@ -28,10 +28,10 @@ public:
 		return this->abajo;
 	}
 	NodeMatriz *getSiguiente() {
-		return this->Siguiente;
+		return this->siguiente;
 	}
 	NodeMatriz *getAnterior() {
-		return this->Anterior;
+		return this->anterior;
 	}
 	NodeMatriz *getAdelante() {
 		return this->adelante;
@@ -55,7 +55,7 @@ public:
 		this->abajo = n;
 	}
 	void setSiguiente(NodeMatriz *n) {
-		this->Siguiente = n;
+		this->siguiente = n;
 	}
 	void setAnterior(NodeMatriz *n) {
 		this->anterior = n;
@@ -83,15 +83,14 @@ template<class N>
 class Matriz_Dispersa
 {
 public:
-	Matriz_Dispersa(N data_, string fila_, string columna_);
+	Matriz_Dispersa<N>();
 	bool Insertar_elemento(N data_, string fila_, string columna_);
 	NodeMatriz<N> *Buscar_fila(string fila_);
 	NodeMatriz<N> *Buscar_columna(string columna_);
 	bool Insertar_en_fila(NodeMatriz<N> *cabecera, NodeMatriz<N> *nodo_nuevo_);
 	bool Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz<N> *nodo_nuevo_);
 	bool Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_);
+	void graficar2();
 private:
-	NodeMatriz<N> root;
+	NodeMatriz<N> *root;
 };
-
-

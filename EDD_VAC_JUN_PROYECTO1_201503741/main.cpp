@@ -1,7 +1,8 @@
 #include "main.h"
-#include "EDD\Lista_Doble_Enlazada_Circular.cpp"
+//#include "EDD\Lista_Doble_Enlazada_Circular.cpp"
 #include "Transaccion.h"
 #include "EDD\Matriz_Dispersa.cpp"
+#include "EDD\Usuario.h"
 
 #include <iostream>
 #include <cstring>
@@ -10,6 +11,7 @@ using namespace std;
 
 int main() {
 	//IniciarSesion();
+
 	//Lista_Doble_Enlazada_Circular<Transaccion*> *Lista = new Lista_Doble_Enlazada_Circular <Transaccion*>();
 	//Transaccion *t1 = new Transaccion("activo1", "uset1", "Guate", "maxi", "04/06/2020", "2 dias");
 	//Lista->add_last(t1);
@@ -18,18 +20,11 @@ int main() {
 	//Transaccion *t3 = new Transaccion("activo3", "uset1", "Guate", "maxi", "10/06/2020", "1 dias");
 	//Lista->add_last(t3);
 	//Lista->graph();
-	//Matriz_Dispersa<int> *Matriz = new Matriz_Dispersa<int>();
-	string a = "-1";
-	string aa = "a";
-	if (a > aa)
-	{
-		cout << "El mayor es " << a << endl;
-	}
-	else
-	{
-		cout << "El mayor es " << aa << endl;
-	}
-	system("pause");
+	
+	
+	Matriz_Dispersa<Usuario*> *Matriz = new Matriz_Dispersa<Usuario*>();
+	Usuario *user1 = new Usuario("user1", "Eddy Murga", "12456", "1", "1");
+	Matriz->Insertar_elemento(user1, user1->getEmpresa(), user1->getDepto());
 	return 0;
 }
 

@@ -2,9 +2,10 @@
 #include "Usuario.h"
 
 template<class N>
-Matriz_Dispersa<N>::Matriz_Dispersa(N data_, string fila_, string columna_)
+inline Matriz_Dispersa<N>::Matriz_Dispersa()
 {
-	this->root = new NodeMatriz<N>(data_, fila_, columna_);
+	Usuario *u = new Usuario("root", "root", "root", "-1", "-1");
+	this->root = new NodeMatriz<N>(u, u->getEmpresa(), u->getDepto());
 }
 
 template<class N>
@@ -14,26 +15,26 @@ bool Matriz_Dispersa<N>::Insertar_elemento(N data_, string fila_, string columna
 	NodeMatriz<N> *n = new NodeMatriz<N>(data_, fila_, columna_);
 	
 	//buscamos la fila 
-	NodeMatriz<N> fila = Buscar_fila(fila_);
+	NodeMatriz<N> *fila = Buscar_fila(fila_);
 	//si la fila no existe la creamos
 	if (fila == 0)
 	{
 		Usuario *n_fila = new Usuario("cabecera", fila_, fila_, fila_, fila_);
 		fila = new NodeMatriz<N>(n_fila, fila_, "-1");
 		//enlazamos la nueva fila con las demas
-		NodeMatriz<T> * aux = this->root;
+		NodeMatriz<N> * aux = this->root;
 		Insertar_en_fila(aux, fila);
 	}
 	
 	//buscamos la columna
-	NodeMatriz<N> columna = Buscar_columna(columna_);
+	NodeMatriz<N> *columna = Buscar_columna(columna_);
 	//si la columna no existe la creamos
 	if (columna ==0)
 	{
-		Usuario *n_Columna = new Usuario("cabecera", columna_, columna_, columna_, columna_);
+		Usuario *n_columna = new Usuario("cabecera", columna_, columna_, columna_, columna_);
 		columna = new NodeMatriz<N>(n_columna, "-1", columna_);
 		//enlazamos la nueva columna con la demas
-		NodeMatriz<T> * aux = this->root;
+		NodeMatriz<N> * aux = this->root;
 		Insertar_en_columna(aux, columna);
 	}
 	
@@ -166,7 +167,7 @@ bool Matriz_Dispersa<N>::Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz
 template<class N>
 bool Matriz_Dispersa<N>::Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_)
 {
-	NodeMatriz<N> aux = nodo_inicial_;
+	NodeMatriz<N> *aux = nodo_inicial_;
 	//vamos a recoorrer los enlazes hasta encontrar el ultimo nodo de atras
 	while (aux->getAtras() != 0)
 	{
@@ -181,4 +182,125 @@ bool Matriz_Dispersa<N>::Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeM
 	aux->setAtras(data_);
 	data_->setAdelante(aux);
 	return true;
+}
+
+template<class N>
+void graficar2() {
+	NodeMatriz<N> *auxC = this->root;
+	NodeMatriz<N> *auxF = this->root;
+	char comillas = '"';
+	ofstream file;
+	file.open("C:\\Users\\EDDY\\Desktop\\Matriz.txt");
+	file << "digraph G { \n";
+	//file << "node[shape = box] \n";
+	file << "graph[nodesep = 1.0] \n";
+
+	//file << "rankdir=LR \n";
+	//filas
+	int grupo = 0;
+	while (auxF != 0)
+	{
+
+		while (auxC != 0)
+		{
+			file << comillas << auxC->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxC->getData()->getLetra() << comillas << ", group = " << grupo << " ]; \n";
+			auxC = auxC->getNext();
+		}
+		grupo++;
+
+		auxC = auxF;
+		auxC = auxC->getAbajo();
+		auxF = auxF->getAbajo();
+
+	}
+
+	auxC = this->root;
+	auxF = this->root;
+
+
+	while (auxF != 0)
+	{
+		//recorro una fila
+
+		while (auxC != 0)
+		{
+			file << comillas << auxC->getData() << comillas;
+			auxC = auxC->getNext();
+			if (auxC != 0)
+			{
+				file << " -> ";
+			}
+		}
+		auxC = auxF;
+		if (auxC->getColumna() == -1) {
+			file << "[dir=both]; \n";
+			//file << "; \n";
+		}
+		else {
+
+			//file << "[constraint = same, dir=both]; \n";
+		}
+		/*grupo++;*/
+		file << "{rank=same ";
+		auxC = auxF;
+		while (auxC != 0)
+		{
+			file << comillas << auxC->getData() << comillas;
+			auxC = auxC->getNext();
+			if (auxC != 0)
+			{
+				file << " ";
+			}
+
+		}
+		file << "} \n \n";
+		//cambio a auxF al siguiente de abajo
+		auxC = auxF;
+		auxC = auxC->getAbajo();
+		auxF = auxF->getAbajo();
+	}
+
+	//columnas
+	//file << "rankdir= TB \n";
+	auxC = this->root;
+	auxF = this->root;
+	while (auxC != 0)
+	{
+		//recorro filas
+		while (auxF != 0)
+		{
+			file << comillas << auxF->getData() << comillas;
+			auxF = auxF->getAbajo();
+			if (auxF != 0)
+			{
+				file << " -> ";
+			}
+
+		}
+		file << "[dir=both]; \n \n";
+
+		////cod
+		//file << "{rank=same ";
+		//auxF = auxC;
+		//while (auxF != 0)
+		//{
+		//	file << comillas << auxF->getData() << comillas;
+		//	auxF = auxF->getAbajo();
+		//	if (auxF != 0)
+		//	{
+		//		file << " ";
+		//	}
+
+		//}
+		//file << "} \n \n";
+		//cod
+
+		auxC = auxC->getNext();
+		auxF = auxC;
+	}
+
+	file << "}";
+	file.close();
+
+	system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Matriz.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Matriz.png");
 }
