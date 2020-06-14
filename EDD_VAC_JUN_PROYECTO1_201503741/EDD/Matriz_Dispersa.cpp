@@ -93,3 +93,50 @@ void Matriz_Dispersa<T>::Insertar_Columna(Node<T>* columna_nueva_)
 	aux->setSiguiente(columna_nueva_);
 	columna_nueva_->setAnterior(aux);
 }
+
+template<class T>
+void Matriz_Dispersa<T>::Insertar_Data(Node<T>* fila_, Node<T>* columna_, Node<T>* data_)
+{
+	Node<T> *aux_fila = fila_;
+	Node<T> *aux_columna = columna_;
+	//buscamos el nodo de lado izquierdo de donde se debe insertar el nodo data
+	while (aux_fila->getSiguiente()->getColumna() != columna_->getColumna())
+	{
+		aux_fila = aux_fila->getSiguiente();
+	}
+	//buscamos el nodo de arriba de donde se debe insertar el nodo data
+	while (aux_columna->getAbajo()->getFila() != fila_->getFila())
+	{
+		aux_columna = aux_columna->getAbajo();
+	}
+	//ya obtenidos los nodos debemos verificar si ya hay un nodo insertado
+	//si no hay nodo insertado unimos los enlazes
+	//si ya hay un nodo debemos insertarlo hacia atras
+	if (aux_fila->getSiguiente() == 0 && aux_columna->getAbajo() == 0)
+	{
+		//esta vacio
+		aux_columna->setAbajo(data_);
+		aux_fila->setSiguiente(data_);
+		data_->setArriba(aux_columna);
+		data_->setAnterior(aux_fila);
+	}
+	else
+	{
+		Insertar_data_Atras(fila_->getSiguiente());
+	}
+
+}
+
+template<class T>
+void Matriz_Dispersa<T>::Insertar_Data_Atras(Node<T> *nodo_inicial_, Node<T> *data_)
+{
+	Node<T> aux = nodo_inicial_;
+	//vamos a recoorrer los enlazes hasta encontrar el ultimo nodo de atras
+	while (aux->getAtras() != 0)
+	{
+		aux = aux->getAtras();
+	}
+	//enlazamos
+	aux->setAtras(data_);
+	data_->setAdelante(aux);
+}

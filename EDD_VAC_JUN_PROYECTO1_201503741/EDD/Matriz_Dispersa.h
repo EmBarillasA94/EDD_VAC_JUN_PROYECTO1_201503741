@@ -89,7 +89,8 @@ public:
 	Node<T> *Buscar_columna(string columna_);
 	void Insertar_fila(Node<T> *fila_nueva_);
 	void Insertar_Columna(Node<T> *columna_nueva_);
-	void Insertar_Data(Node<T> *fila_, Node<T> *columna_, Node<T> *data_)
+	void Insertar_Data(Node<T> *fila_, Node<T> *columna_, Node<T> *data_);
+	void Insertar_Data_Atras(Node<T> *nodo_inicial_, Node<T> *data_);
 private:
 	Node<T> root;
 };
