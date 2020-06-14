@@ -233,7 +233,7 @@ void Matriz_Dispersa<N>::graph()
 				file << comillas << auxC->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxC->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
 				auxC = auxC->getSiguiente();
 			}
-			NodeMatriz<N> auxZ = auxC;
+			NodeMatriz<N> *auxZ = auxC;
 			while (auxZ != 0)
 			{
 				auxZ = auxZ->getAtras();
