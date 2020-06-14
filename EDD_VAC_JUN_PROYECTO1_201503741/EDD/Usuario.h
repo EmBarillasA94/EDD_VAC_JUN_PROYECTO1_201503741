@@ -30,6 +30,12 @@ public:
 	string getDepto() {
 		return this->depto;
 	}
+	string getInfo() {
+		string texto = this->usuario + "\\l"
+			+ this->nombre + "\\l"
+			+ this->contrasenia + "\\l";
+		return texto;
+	}
 private:
 	string usuario;
 	string nombre;

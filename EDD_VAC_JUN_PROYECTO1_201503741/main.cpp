@@ -23,9 +23,9 @@ int main() {
 	
 	
 	Matriz_Dispersa<Usuario*> *Matriz = new Matriz_Dispersa<Usuario*>();
-	Usuario *user1 = new Usuario("user1", "Eddy Murga", "12456", "1", "1");
+	Usuario *user1 = new Usuario("user1", "Eddy Murga", "12456", "Guatemala", "Google");
 	Matriz->Insertar_elemento(user1, user1->getEmpresa(), user1->getDepto());
-	Matriz->graficar2();
+	Matriz->graph();
 	return 0;
 }
 

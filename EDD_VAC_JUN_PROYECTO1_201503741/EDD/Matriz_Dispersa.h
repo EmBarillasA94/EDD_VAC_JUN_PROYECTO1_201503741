@@ -90,7 +90,7 @@ public:
 	bool Insertar_en_fila(NodeMatriz<N> *cabecera, NodeMatriz<N> *nodo_nuevo_);
 	bool Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz<N> *nodo_nuevo_);
 	bool Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_);
-	void graficar2();
+	void graph();
 private:
 	NodeMatriz<N> *root;
 };

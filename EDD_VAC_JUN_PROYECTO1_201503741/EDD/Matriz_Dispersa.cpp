@@ -186,7 +186,7 @@ bool Matriz_Dispersa<N>::Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeM
 }
 
 template<class N>
-void Matriz_Dispersa<N>::graficar2()
+void Matriz_Dispersa<N>::graph()
 {
 	NodeMatriz<N> *auxC = this->root;
 	NodeMatriz<N> *auxF = this->root;
@@ -205,8 +205,17 @@ void Matriz_Dispersa<N>::graficar2()
 
 		while (auxC != 0)
 		{
-			file << comillas << auxC->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxC->getData()->getLetra() << comillas << ", group = " << grupo << " ]; \n";
-			auxC = auxC->getNext();
+			if (auxC->getData()->getUsuario() == "cabecera" || auxC->getData()->getUsuario() == "root")
+			{
+				file << comillas << auxC->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxC->getData()->getNombre() << comillas << ", group = " << grupo << " ]; \n";
+				auxC = auxC->getSiguiente();
+			}
+			else
+			{
+				file << comillas << auxC->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxC->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
+				auxC = auxC->getSiguiente();
+			}
+			
 		}
 		grupo++;
 
@@ -227,14 +236,14 @@ void Matriz_Dispersa<N>::graficar2()
 		while (auxC != 0)
 		{
 			file << comillas << auxC->getData() << comillas;
-			auxC = auxC->getNext();
+			auxC = auxC->getSiguiente();
 			if (auxC != 0)
 			{
 				file << " -> ";
 			}
 		}
 		auxC = auxF;
-		if (auxC->getColumna() == -1) {
+		if (auxC->getColumna() == "-1") {
 			file << "[dir=both]; \n";
 			//file << "; \n";
 		}
@@ -248,7 +257,7 @@ void Matriz_Dispersa<N>::graficar2()
 		while (auxC != 0)
 		{
 			file << comillas << auxC->getData() << comillas;
-			auxC = auxC->getNext();
+			auxC = auxC->getSiguiente();
 			if (auxC != 0)
 			{
 				file << " ";
@@ -297,7 +306,7 @@ void Matriz_Dispersa<N>::graficar2()
 		//file << "} \n \n";
 		//cod
 
-		auxC = auxC->getNext();
+		auxC = auxC->getSiguiente();
 		auxF = auxC;
 	}
 
