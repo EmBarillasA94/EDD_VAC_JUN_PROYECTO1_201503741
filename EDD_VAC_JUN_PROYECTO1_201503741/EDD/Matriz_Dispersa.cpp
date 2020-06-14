@@ -231,22 +231,17 @@ void Matriz_Dispersa<N>::graph()
 			else
 			{
 				file << comillas << auxC->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxC->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
+				if (auxC != 0)
+				{
+					NodeMatriz<N> *auxZ = auxC;
+					while (auxZ->getAtras() != 0)
+					{
+						auxZ = auxZ->getAtras();
+						file << comillas << auxZ->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxZ->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
+					}
+				}
 				auxC = auxC->getSiguiente();
 			}
-			NodeMatriz<N> *auxZ = auxC;
-			while (auxZ != 0)
-			{
-				auxZ = auxZ->getAtras();
-				try
-				{
-					file << comillas << auxZ->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxZ->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
-				}
-				catch (const std::exception&)
-				{
-
-				}
-			}
-			
 		}
 		grupo++;
 
