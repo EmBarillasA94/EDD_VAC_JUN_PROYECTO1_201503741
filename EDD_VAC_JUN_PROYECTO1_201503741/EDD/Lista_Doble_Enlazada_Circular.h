@@ -1,5 +1,4 @@
-#ifndef LISTA_DOBLE_ENLAZADA_CIRCULAR_H
-#define LISTA_DOBLE_ENLAZADA_CIRCULAR_H
+
 
 #include <iostream>
 #include <cstring>
@@ -58,5 +57,3 @@ private:
 	Node<T> *last;
 	int size;
 };
-
-#endif // !LISTA_DOBLE_ENLAZADA_CIRCULAR_H

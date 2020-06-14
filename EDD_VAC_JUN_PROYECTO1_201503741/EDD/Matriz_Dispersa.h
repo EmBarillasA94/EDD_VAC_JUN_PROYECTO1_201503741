@@ -1,14 +1,14 @@
-#ifndef MATRIZ_DISPERSA_H
-#define MATRIZ_DISPERSA_H
+
 
 #include <iostream>
+#include <cstring>
 using namespace std;
 
-template<class T>
-class Node
+template<class N>
+class NodeMatriz
 {
 public:
-	Node(T data_, string fila_, string columna_) 
+	NodeMatriz(N data_, string fila_, string columna_) 
 	{
 		this->data = data_;
 		this->fila = fila_;
@@ -21,25 +21,25 @@ public:
 		this->atras = 0;
 	}
 	//setters and getters
-	Node *getArriba() {
+	NodeMatriz *getArriba() {
 		return this->arriba;
 	}
-	Node *getAbajo() {
+	NodeMatriz *getAbajo() {
 		return this->abajo;
 	}
-	Node *getSiguiente() {
+	NodeMatriz *getSiguiente() {
 		return this->Siguiente;
 	}
-	Node *getAnterior() {
+	NodeMatriz *getAnterior() {
 		return this->Anterior;
 	}
-	Node *getAdelante() {
+	NodeMatriz *getAdelante() {
 		return this->adelante;
 	}
-	Node *getAtras() {
+	NodeMatriz *getAtras() {
 		return this->atras;
 	}
-	T getData() {
+	N getData() {
 		return this->data;
 	}
 	string getFila() {
@@ -48,52 +48,51 @@ public:
 	string getColumna() {
 		return this->columna;
 	}
-	void setArriba(Node *n) {
+	void setArriba(NodeMatriz *n) {
 		this->arriba = n;
 	}
-	void setAbajo(Node *n) {
+	void setAbajo(NodeMatriz *n) {
 		this->abajo = n;
 	}
-	void setSiguiente(Node *n) {
+	void setSiguiente(NodeMatriz *n) {
 		this->Siguiente = n;
 	}
-	void setAnterior(Node *n) {
+	void setAnterior(NodeMatriz *n) {
 		this->anterior = n;
 	}
-	void setAdelante(Node *n) {
+	void setAdelante(NodeMatriz *n) {
 		this->adelante = n;
 	}
-	void setAtras(Node *n) {
+	void setAtras(NodeMatriz *n) {
 		this->atras = n;
 	}
 
 private:
-	T data;
+	N data;
 	string fila;
 	string columna;
-	Node *arriba;
-	Node *abajo;
-	Node *siguiente;
-	Node *anterior;
-	Node *adelante;
-	Node *atras;
+	NodeMatriz *arriba;
+	NodeMatriz *abajo;
+	NodeMatriz *siguiente;
+	NodeMatriz *anterior;
+	NodeMatriz *adelante;
+	NodeMatriz *atras;
 };
 
-template<class T>
+template<class N>
 class Matriz_Dispersa
 {
 public:
-	Matriz_Dispersa(T data_, string fila_, string columna_);
-	void Insertar_elemento(T data_, string fila_, string columna_);
-	Node<T> *Buscar_fila(string fila_);
-	Node<T> *Buscar_columna(string columna_);
-	void Insertar_fila(Node<T> *fila_nueva_);
-	void Insertar_Columna(Node<T> *columna_nueva_);
-	void Insertar_Data(Node<T> *fila_, Node<T> *columna_, Node<T> *data_);
-	void Insertar_Data_Atras(Node<T> *nodo_inicial_, Node<T> *data_);
+	Matriz_Dispersa(N data_, string fila_, string columna_);
+	void Insertar_elemento(N data_, string fila_, string columna_);
+	NodeMatriz<N> *Buscar_fila(string fila_);
+	NodeMatriz<N> *Buscar_columna(string columna_);
+	void Insertar_fila(NodeMatriz<N> *fila_nueva_);
+	void Insertar_Columna(NodeMatriz<N> *columna_nueva_);
+	void Insertar_Data(NodeMatriz<N> *fila_, NodeMatriz<N> *columna_, NodeMatriz<N> *data_);
+	void Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_);
 private:
-	Node<T> root;
+	NodeMatriz<N> root;
 };
 
-#endif // !MATRIZ_DISPERSA_H
 

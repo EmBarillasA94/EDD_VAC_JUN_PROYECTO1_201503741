@@ -1,49 +1,49 @@
 #include "Matriz_Dispersa.h"
 #include "Usuario.h"
 
-template<class T>
-Matriz_Dispersa<T>::Matriz_Dispersa(T data_, string fila_, string columna_)
+template<class N>
+Matriz_Dispersa<N>::Matriz_Dispersa(N data_, string fila_, string columna_)
 {
-	this->root = new Node<T>(data_, fila_, columna_);
+	this->root = new NodeMatriz<N>(data_, fila_, columna_);
 }
 
-template<class T>
-void Matriz_Dispersa<T>::Insertar_elemento(T data_, string fila_, string columna_)
+template<class N>
+void Matriz_Dispersa<N>::Insertar_elemento(N data_, string fila_, string columna_)
 {
-	Node<T> *n = new Node<T>(data_, fila_, columna_);
-	Node<T> fila = Buscar_fila(fila_);
-	Node<T> columna = Buscar_columna(columna_);
-	//Evaluar condiciones
-	if (fila == 0 && columna == 0)//si la fila y la columna no existen
+	//cramos el nodo nuevo
+	NodeMatriz<N> *n = new NodeMatriz<N>(data_, fila_, columna_);
+	
+	//buscamos la fila 
+	NodeMatriz<N> fila = Buscar_fila(fila_);
+	//si la fila no existe la creamos
+	if (fila ==0)
 	{
-		//crear la fila y columna
-		Usuario *n_fila = new Usuario(fila_, fila_, fila_, fila_, fila_);
-		fila = new Node<T>(n_fila, fila_, "-1");
-		Usuario *n_Columna = new Usuario(columna_, columna_, columna_, columna_, columan_);
-		columna = new Node<T>(n_columna, "-1", columna_);
-		//enlazar la fila nueva y la columna nueva
+		Usuario *n_fila = new Usuario("cabecera", fila_, fila_, fila_, fila_);
+		fila = new NodeMatriz<N>(n_fila, fila_, "-1");
+		//enlazamos la nueva fila con las demas
 		Insertar_fila(fila);
+	}
+	
+	//buscamos la columna
+	NodeMatriz<N> columna = Buscar_columna(columna_);
+	//si la columna no existe la creamos
+	if (columna ==0)
+	{
+		Usuario *n_Columna = new Usuario("cabecera", columna_, columna_, columna_, columna_);
+		columna = new NodeMatriz<N>(n_columna, "-1", columna_);
+		//enlazamos la nueva columna con la demas
 		Insertar_Columna(columna);
-
 	}
-	else if (fila != 0 && columna == 0)//si la fila si existe pero la columna no existe
-	{
-
-	}
-	else if (fila == 0 && columna !=0)// si la fila no existe pero la columna si existe
-	{
-
-	}
-	else if (fila != 0 && columna != 0)// si la fila y la columna existen
-	{
-
-	}
+	
+	//enlazamos la fila y la columna con el nodo nuevo
+	Insertar_Data(fila, columna, n);
+	
 }
 
-template<class T>
-Node<T>* Matriz_Dispersa<T>::Buscar_fila(string fila_)
+template<class N>
+NodeMatriz<N>* Matriz_Dispersa<N>::Buscar_fila(string fila_)
 {
-	Node<T> *aux = this->root;
+	NodeMatriz<N> *aux = this->root;
 	while (aux != 0)
 	{
 		if (aux->getFila() == fila_)
@@ -55,10 +55,10 @@ Node<T>* Matriz_Dispersa<T>::Buscar_fila(string fila_)
 	return 0;
 }
 
-template<class T>
-Node<T>* Matriz_Dispersa<T>::Buscar_columna(string columna_)
+template<class N>
+NodeMatriz<N>* Matriz_Dispersa<N>::Buscar_columna(string columna_)
 {
-	Node<T> *aux = this->root;
+	NodeMatriz<N> *aux = this->root;
 	while (aux !=0)
 	{
 		if (aux->getColumna() == columna_)
@@ -70,10 +70,10 @@ Node<T>* Matriz_Dispersa<T>::Buscar_columna(string columna_)
 	return 0;
 }
 
-template<class T>
-void Matriz_Dispersa<T>::Insertar_fila(Node<T>* fila_nueva_)
+template<class N>
+void Matriz_Dispersa<N>::Insertar_fila(NodeMatriz<N>* fila_nueva_)
 {
-	Node<T> *aux = this->root;
+	NodeMatriz<N> *aux = this->root;
 	while (aux->getAbajo() != 0) 
 	{
 		aux = aux->getAbajo();
@@ -82,10 +82,10 @@ void Matriz_Dispersa<T>::Insertar_fila(Node<T>* fila_nueva_)
 	fila_nueva_->setArriba(aux);
 }
 
-template<class T>
-void Matriz_Dispersa<T>::Insertar_Columna(Node<T>* columna_nueva_)
+template<class N>
+void Matriz_Dispersa<N>::Insertar_Columna(NodeMatriz<N>* columna_nueva_)
 {
-	Node<T> *aux = this->root;
+	NodeMatriz<N> *aux = this->root;
 	while (aux->getSiguiente() != 0) 
 	{
 		aux = aux->getSiguiente();
@@ -94,20 +94,46 @@ void Matriz_Dispersa<T>::Insertar_Columna(Node<T>* columna_nueva_)
 	columna_nueva_->setAnterior(aux);
 }
 
-template<class T>
-void Matriz_Dispersa<T>::Insertar_Data(Node<T>* fila_, Node<T>* columna_, Node<T>* data_)
+template<class N>
+void Matriz_Dispersa<N>::Insertar_Data(NodeMatriz<N>* fila_, NodeMatriz<N>* columna_, NodeMatriz<N>* data_)
 {
-	Node<T> *aux_fila = fila_;
-	Node<T> *aux_columna = columna_;
-	//buscamos el nodo de lado izquierdo de donde se debe insertar el nodo data
-	while (aux_fila->getSiguiente()->getColumna() != columna_->getColumna())
+	NodeMatriz<N> *aux_fila = fila_;
+	
+	
+	
+
+
+	//buscamos la columna anterior de donde debe ser insertado el nodo
+	NodeMatriz<N> *aux = this->root;
+	bool encontrado = false;
+	while (aux->getSiguiente() != 0 && !encontrado)
 	{
-		aux_fila = aux_fila->getSiguiente();
+		if (data_->getColumna() == aux->getSiguiente()->getColumna())//depto 3 == depto 3
+		{
+			//columna encontrada
+			//movemos el nodo aux_fila a esa columna
+			while (aux_fila->getSiguiente() != 0 && aux_fila->getColumna() != aux->getColumna())
+			{
+				aux_fila = aux_fila->getSiguiente();
+			}
+			encontrado = true;
+		}
+		else
+		{
+			aux = aux->getSiguiente();
+
+		}
 	}
-	//buscamos el nodo de arriba de donde se debe insertar el nodo data
-	while (aux_columna->getAbajo()->getFila() != fila_->getFila())
+	
+	//buscamos la fila de arrbia donde debe de ser insertado el nodo
+	aux = this->root;
+	encontrado = false;
+	while (aux->getAbajo() != 0 && !encontrado)
 	{
-		aux_columna = aux_columna->getAbajo();
+		while (aux_columna->getAbajo()->getFila() != fila_->getFila())
+		{
+			aux_columna = aux_columna->getAbajo();
+		}
 	}
 	//ya obtenidos los nodos debemos verificar si ya hay un nodo insertado
 	//si no hay nodo insertado unimos los enlazes
@@ -119,18 +145,19 @@ void Matriz_Dispersa<T>::Insertar_Data(Node<T>* fila_, Node<T>* columna_, Node<T
 		aux_fila->setSiguiente(data_);
 		data_->setArriba(aux_columna);
 		data_->setAnterior(aux_fila);
+		cout << "El usuario ha sido insertado" << endl;
 	}
 	else
 	{
-		Insertar_data_Atras(fila_->getSiguiente());
+		Insertar_data_Atras(fila_->getSiguiente(), data_);
 	}
 
 }
 
-template<class T>
-void Matriz_Dispersa<T>::Insertar_Data_Atras(Node<T> *nodo_inicial_, Node<T> *data_)
+template<class N>
+void Matriz_Dispersa<N>::Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_)
 {
-	Node<T> aux = nodo_inicial_;
+	NodeMatriz<N> aux = nodo_inicial_;
 	//vamos a recoorrer los enlazes hasta encontrar el ultimo nodo de atras
 	while (aux->getAtras() != 0)
 	{

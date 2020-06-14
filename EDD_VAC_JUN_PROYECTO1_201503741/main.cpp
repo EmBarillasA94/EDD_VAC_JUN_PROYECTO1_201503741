@@ -4,6 +4,7 @@
 #include "EDD\Matriz_Dispersa.cpp"
 
 #include <iostream>
+#include <cstring>
 #include <string>
 using namespace std;
 
@@ -17,7 +18,8 @@ int main() {
 	//Transaccion *t3 = new Transaccion("activo3", "uset1", "Guate", "maxi", "10/06/2020", "1 dias");
 	//Lista->add_last(t3);
 	//Lista->graph();
-	Matriz_Dispersa<int> *Matriz = new Matriz_Dispersa<int>();
+	//Matriz_Dispersa<int> *Matriz = new Matriz_Dispersa<int>();
+	
 	return 0;
 }
 
