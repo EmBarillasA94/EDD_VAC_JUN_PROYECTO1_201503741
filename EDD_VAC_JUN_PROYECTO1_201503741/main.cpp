@@ -1,7 +1,7 @@
 #include "main.h"
 #include "EDD\Lista_Doble_Enlazada_Circular.cpp"
 #include "Transaccion.h"
-//#include "EDD\Matriz_Dispersa.cpp"
+#include "EDD\Matriz_Dispersa.cpp"
 
 #include <iostream>
 #include <cstring>
