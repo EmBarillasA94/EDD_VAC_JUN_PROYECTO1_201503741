@@ -1,5 +1,6 @@
 #include "Matriz_Dispersa.h"
 #include "Usuario.h"
+#include <fstream>
 
 template<class N>
 inline Matriz_Dispersa<N>::Matriz_Dispersa()
@@ -185,7 +186,8 @@ bool Matriz_Dispersa<N>::Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeM
 }
 
 template<class N>
-void graficar2() {
+void Matriz_Dispersa<N>::graficar2()
+{
 	NodeMatriz<N> *auxC = this->root;
 	NodeMatriz<N> *auxF = this->root;
 	char comillas = '"';
@@ -303,4 +305,5 @@ void graficar2() {
 	file.close();
 
 	system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Matriz.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Matriz.png");
+	system("C:\\Users\\EDDY\\Desktop\\Grafica_Matriz.png");
 }
