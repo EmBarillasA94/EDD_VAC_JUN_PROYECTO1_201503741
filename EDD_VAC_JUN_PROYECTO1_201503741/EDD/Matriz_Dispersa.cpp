@@ -83,7 +83,25 @@ bool Matriz_Dispersa<N>::Insertar_en_fila(NodeMatriz<N> *cabecera, NodeMatriz<N>
 	while (cabecera->getAbajo() != 0) 
 	{
 		//encontrar el nodo arriba de donde debe ser insertado el nuevo nodo
-		if (cabecera->getAbajo()->getFila() < nodo_nuevo_->getFila() )
+		//si verificamos el nodo de abajo y resulta ser de la misma fila hay
+		//que verificar que no sea de la misma columna 
+		if (cabecera->getAbajo()->getFila() == nodo_nuevo_->getFila())
+		{
+			if (cabecera->getAbajo()->getColumna() == nodo_nuevo_->getColumna())
+			{
+				//si es de la misma fila y columna pero el usuario es el mismo NO insertamos 
+				if (cabecera->getAbajo()->getData()->getUsuario() != nodo_nuevo_->getData()->getUsuario())
+				{
+					return Insertar_Data_Atras(cabecera->getAbajo(), nodo_nuevo_);
+				}
+				else
+				{
+					return false;
+				}
+			}
+			break;
+		}
+		else if (cabecera->getAbajo()->getFila() < nodo_nuevo_->getFila() )
 		{
 			cabecera = cabecera->getAbajo();
 		}
@@ -97,14 +115,7 @@ bool Matriz_Dispersa<N>::Insertar_en_fila(NodeMatriz<N> *cabecera, NodeMatriz<N>
 	}
 	//pregunto si el nodo tiene otro nodo abajo o = 0
 	if (cabecera->getAbajo() != 0)
-	{
-		//ya hay un nodo entonces hay que verificar que no tenga la misma columna y fila
-		//si las tiene hay que enlazar hasta atras de ese nodo
-		if (cabecera->getAbajo()->getFila() == nodo_nuevo_->getFila() && cabecera->getAbajo()->getColumna() == nodo_nuevo_->getColumna())
-		{
-			//hay que insertar hasta atras de ese nodo
-			return Insertar_Data_Atras(cabecera->getAbajo(), nodo_nuevo_);
-		}
+	{	
 		//hay que enlazar el nodo de abajo de cabecera tambien 
 		nodo_nuevo_->setAbajo(cabecera->getAbajo());
 		cabecera->getAbajo()->setArriba(nodo_nuevo_);
@@ -127,7 +138,14 @@ bool Matriz_Dispersa<N>::Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz
 	while (cabecera->getSiguiente() != 0)
 	{
 		//encontrar el nodo anterior de donde debe ser insertado el nuevo nodo
-		if (cabecera->getSiguiente()->getFila() < nodo_nuevo_->getFila())
+		//verificamos que el nodo siguiente sea igual al nodo que estamos buscando
+		if (cabecera->getSiguiente()->getColumna() == nodo_nuevo_->getColumna())
+		{
+			//ya no evaluo si es la misma fila y columna por que eso se evaluo en 
+			//insertar_en_fila
+			break;
+		}
+		if (cabecera->getSiguiente()->getColumna() < nodo_nuevo_->getColumna())
 		{
 			cabecera = cabecera->getSiguiente();
 		}
@@ -142,12 +160,12 @@ bool Matriz_Dispersa<N>::Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz
 	//pregunto si el nodo tiene otro nodo siguiente o = 0
 	if (cabecera->getSiguiente() != 0)
 	{
-		//ya hay un nodo entonces hay que verificar que no tenga la misma columna y fila
-		//si las tiene hay que enlazar hasta atras de ese nodo
+		//pregunto si el nodo siguiente es de la misma fila y columna 
 		if (cabecera->getSiguiente()->getFila() == nodo_nuevo_->getFila() && cabecera->getSiguiente()->getColumna() == nodo_nuevo_->getColumna())
 		{
-			//hay que insertar hasta atras de ese nodo
-			return Insertar_Data_Atras(cabecera->getSiguiente(), nodo_nuevo_);
+			//si son iguales ya no llamo a la funcion Insertar_Data_Atras 
+			//por eso ya lo inserto en el Insertar_en_Fila
+			return true;
 		}
 		//hay que enlazar el nodo siguiente de la cabecera tambien 
 		nodo_nuevo_->setSiguiente(cabecera->getSiguiente());
@@ -214,6 +232,12 @@ void Matriz_Dispersa<N>::graph()
 			{
 				file << comillas << auxC->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxC->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
 				auxC = auxC->getSiguiente();
+			}
+			NodeMatriz<N> auxZ = auxC;
+			while (auxZ != 0)
+			{
+				auxZ = auxZ->getAtras();
+				file << comillas << auxZ->getData() << comillas << "[ shape = rectangle, label = " << comillas << auxZ->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
 			}
 			
 		}
