@@ -1,7 +1,7 @@
 #include "main.h"
 #include "EDD\Lista_Doble_Enlazada_Circular.cpp"
 #include "Transaccion.h"
-#include "EDD\Matriz_Dispersa.cpp"
+//#include "EDD\Matriz_Dispersa.cpp"
 
 #include <iostream>
 #include <cstring>
@@ -19,7 +19,17 @@ int main() {
 	//Lista->add_last(t3);
 	//Lista->graph();
 	//Matriz_Dispersa<int> *Matriz = new Matriz_Dispersa<int>();
-	
+	string a = "-1";
+	string aa = "a";
+	if (a > aa)
+	{
+		cout << "El mayor es " << a << endl;
+	}
+	else
+	{
+		cout << "El mayor es " << aa << endl;
+	}
+	system("pause");
 	return 0;
 }
 

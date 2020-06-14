@@ -87,10 +87,9 @@ public:
 	void Insertar_elemento(N data_, string fila_, string columna_);
 	NodeMatriz<N> *Buscar_fila(string fila_);
 	NodeMatriz<N> *Buscar_columna(string columna_);
-	void Insertar_fila(NodeMatriz<N> *fila_nueva_);
-	void Insertar_Columna(NodeMatriz<N> *columna_nueva_);
-	void Insertar_Data(NodeMatriz<N> *fila_, NodeMatriz<N> *columna_, NodeMatriz<N> *data_);
-	void Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_);
+	void Insertar_en_fila(NodeMatriz<N> *cabecera, NodeMatriz<N> *nodo_nuevo_);
+	void Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz<N> *nodo_nuevo_);
+	bool Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_);
 private:
 	NodeMatriz<N> root;
 };

@@ -16,12 +16,12 @@ void Matriz_Dispersa<N>::Insertar_elemento(N data_, string fila_, string columna
 	//buscamos la fila 
 	NodeMatriz<N> fila = Buscar_fila(fila_);
 	//si la fila no existe la creamos
-	if (fila ==0)
+	if (fila == 0)
 	{
 		Usuario *n_fila = new Usuario("cabecera", fila_, fila_, fila_, fila_);
 		fila = new NodeMatriz<N>(n_fila, fila_, "-1");
 		//enlazamos la nueva fila con las demas
-		Insertar_fila(fila);
+		Insertar_en_fila(fila);
 	}
 	
 	//buscamos la columna
@@ -32,11 +32,11 @@ void Matriz_Dispersa<N>::Insertar_elemento(N data_, string fila_, string columna
 		Usuario *n_Columna = new Usuario("cabecera", columna_, columna_, columna_, columna_);
 		columna = new NodeMatriz<N>(n_columna, "-1", columna_);
 		//enlazamos la nueva columna con la demas
-		Insertar_Columna(columna);
+		Insertar_en_columna(columna);
 	}
 	
 	//enlazamos la fila y la columna con el nodo nuevo
-	Insertar_Data(fila, columna, n);
+	
 	
 }
 
@@ -71,19 +71,60 @@ NodeMatriz<N>* Matriz_Dispersa<N>::Buscar_columna(string columna_)
 }
 
 template<class N>
-void Matriz_Dispersa<N>::Insertar_fila(NodeMatriz<N>* fila_nueva_)
+void Matriz_Dispersa<N>::Insertar_en_fila(NodeMatriz<N> *cabecera, NodeMatriz<N>* nodo_nuevo_)
 {
-	NodeMatriz<N> *aux = this->root;
-	while (aux->getAbajo() != 0) 
+	while (cabecera->getAbajo() != 0) 
 	{
-		aux = aux->getAbajo();
+		//encontrar el nodo arriba de donde debe ser insertado el nuevo nodo
+		if (cabecera->getAbajo()->getFila() < nodo_nuevo_->getFila() )
+		{
+			cabecera = cabecera->getAbajo();
+		}
+		else
+		{
+			//se paso del nodo de arriba
+			//subir una posicion y salir del ciclo
+			cabecera = cabecera->getArriba();
+			break;
+		}
+		
 	}
-	aux->setAbajo(fila_nueva_);
-	fila_nueva_->setArriba(aux);
+	//pregunto si el nodo tiene otro nodo abajo o = 0
+	if (cabecera->getAbajo() != 0)
+	{
+		//ya hay un nodo entonces hay que verificar que no tenga la misma columna y fila
+		//si las tiene hay que enlazar hasta atras de ese nodo
+		if (cabecera->getAbajo()->getFila == nodo_nuevo_->getFila() && cabecera->getAbajo()->getColumna() == nodo_nuevo_->getColumna())
+		{
+			//hay que insertar hasta atras de ese nodo
+			bool insertado = Insertar_Data_Atras(cabecera->getAbajo(), nodo_nuevo_);
+			if (insertado)
+			{
+				cout << "Usuario Insertado" << endl;
+				system("pause");
+			}
+			else
+			{
+				cout << "Usuario Repetido intente con otro usuario" << endl;
+				system("pause");
+			}
+		}
+		//hay que enlazar el nodo de abajo de cabecera tambien 
+		nodo_nuevo_->setAbajo(cabecera->getAbajo());
+		cabecera->getAbajo()->setArriba(nodo_nuevo_);
+		cabecera->setAbajo(nodo_nuevo_);
+		nodo_nuevo_->setArriba(cabecera);
+	}
+	else
+	{
+		//el nodo es el ultimo de todos
+		cabecera->setAbajo(nodo_nuevo_);
+		nodo_nuevo_->setArriba(cabecera);
+	}
 }
 
 template<class N>
-void Matriz_Dispersa<N>::Insertar_Columna(NodeMatriz<N>* columna_nueva_)
+void Matriz_Dispersa<N>::Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz<N> *columna_nueva_)
 {
 	NodeMatriz<N> *aux = this->root;
 	while (aux->getSiguiente() != 0) 
@@ -95,75 +136,21 @@ void Matriz_Dispersa<N>::Insertar_Columna(NodeMatriz<N>* columna_nueva_)
 }
 
 template<class N>
-void Matriz_Dispersa<N>::Insertar_Data(NodeMatriz<N>* fila_, NodeMatriz<N>* columna_, NodeMatriz<N>* data_)
-{
-	NodeMatriz<N> *aux_fila = fila_;
-	
-	
-	
-
-
-	//buscamos la columna anterior de donde debe ser insertado el nodo
-	NodeMatriz<N> *aux = this->root;
-	bool encontrado = false;
-	while (aux->getSiguiente() != 0 && !encontrado)
-	{
-		if (data_->getColumna() == aux->getSiguiente()->getColumna())//depto 3 == depto 3
-		{
-			//columna encontrada
-			//movemos el nodo aux_fila a esa columna
-			while (aux_fila->getSiguiente() != 0 && aux_fila->getColumna() != aux->getColumna())
-			{
-				aux_fila = aux_fila->getSiguiente();
-			}
-			encontrado = true;
-		}
-		else
-		{
-			aux = aux->getSiguiente();
-
-		}
-	}
-	
-	//buscamos la fila de arrbia donde debe de ser insertado el nodo
-	aux = this->root;
-	encontrado = false;
-	while (aux->getAbajo() != 0 && !encontrado)
-	{
-		while (aux_columna->getAbajo()->getFila() != fila_->getFila())
-		{
-			aux_columna = aux_columna->getAbajo();
-		}
-	}
-	//ya obtenidos los nodos debemos verificar si ya hay un nodo insertado
-	//si no hay nodo insertado unimos los enlazes
-	//si ya hay un nodo debemos insertarlo hacia atras
-	if (aux_fila->getSiguiente() == 0 && aux_columna->getAbajo() == 0)
-	{
-		//esta vacio
-		aux_columna->setAbajo(data_);
-		aux_fila->setSiguiente(data_);
-		data_->setArriba(aux_columna);
-		data_->setAnterior(aux_fila);
-		cout << "El usuario ha sido insertado" << endl;
-	}
-	else
-	{
-		Insertar_data_Atras(fila_->getSiguiente(), data_);
-	}
-
-}
-
-template<class N>
-void Matriz_Dispersa<N>::Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_)
+bool Matriz_Dispersa<N>::Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_)
 {
 	NodeMatriz<N> aux = nodo_inicial_;
 	//vamos a recoorrer los enlazes hasta encontrar el ultimo nodo de atras
 	while (aux->getAtras() != 0)
 	{
+		if (aux->getData()->getUsuario() == data_->getData()->getUsuario())
+		{
+			//no puede repetirse el nombre de usuario en la misma fila y columna
+			return false;
+		}
 		aux = aux->getAtras();
 	}
 	//enlazamos
 	aux->setAtras(data_);
 	data_->setAdelante(aux);
+	return true;
 }
