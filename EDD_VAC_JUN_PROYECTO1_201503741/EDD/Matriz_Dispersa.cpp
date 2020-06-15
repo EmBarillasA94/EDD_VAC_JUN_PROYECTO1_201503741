@@ -109,7 +109,6 @@ bool Matriz_Dispersa<N>::Insertar_en_fila(NodeMatriz<N> *cabecera, NodeMatriz<N>
 		{
 			//se paso del nodo de arriba
 			//subir una posicion y salir del ciclo
-			cabecera = cabecera->getArriba();
 			break;
 		}
 	}
@@ -145,7 +144,7 @@ bool Matriz_Dispersa<N>::Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz
 			//insertar_en_fila
 			break;
 		}
-		if (cabecera->getSiguiente()->getColumna() < nodo_nuevo_->getColumna())
+		else if (cabecera->getSiguiente()->getColumna() < nodo_nuevo_->getColumna())
 		{
 			cabecera = cabecera->getSiguiente();
 		}
@@ -153,7 +152,6 @@ bool Matriz_Dispersa<N>::Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz
 		{
 			//se paso del nodo anterior
 			//regresar una posicion y salir del ciclo
-			cabecera = cabecera->getAnterior();
 			break;
 		}
 	}
