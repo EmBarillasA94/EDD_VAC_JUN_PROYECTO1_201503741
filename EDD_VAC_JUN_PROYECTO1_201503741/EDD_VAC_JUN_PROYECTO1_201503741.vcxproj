@@ -116,6 +116,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EDD\Activo.h" />
     <ClInclude Include="EDD\Arbol_AVL.h" />
     <ClInclude Include="EDD\Lista_Doble_Enlazada_Circular.h" />
     <ClInclude Include="EDD\Matriz_Dispersa.h" />

@@ -5,3 +5,27 @@ inline Arbol_AVL<A>::Arbol_AVL()
 {
 	this->root = 0;
 }
+template<class A>
+inline void Arbol_AVL<A>::Insertar(A nuevo)
+{
+	this->root;
+}
+
+template<class A>
+Node_Arbol<A>* Arbol_AVL<A>::Insertar_P(Node_Arbol<A>* raiz, A nuevo)
+{
+	if (raiz != 0)
+	{
+		Node_Arbol<A> *n = new Node_Arbol<A>(nuevo);
+		raiz = n;
+		return raiz;
+	}
+	else
+	{
+		if (raiz->getData()->get)
+		{
+
+		}
+	}
+	return 0;
+}
