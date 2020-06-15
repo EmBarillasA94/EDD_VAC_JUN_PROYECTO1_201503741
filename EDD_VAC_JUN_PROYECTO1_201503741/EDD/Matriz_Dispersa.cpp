@@ -20,7 +20,7 @@ bool Matriz_Dispersa<N>::Insertar_elemento(N data_, string fila_, string columna
 	//si la fila no existe la creamos
 	if (fila == 0)
 	{
-		Usuario *n_fila = new Usuario("cabecera", fila_, fila_, fila_, fila_);
+		Usuario *n_fila = new Usuario("cabecera", fila_, fila_, "-1", fila_);
 		fila = new NodeMatriz<N>(n_fila, fila_, "-1");
 		//enlazamos la nueva fila con las demas
 		NodeMatriz<N> * aux = this->root;
@@ -223,19 +223,19 @@ void Matriz_Dispersa<N>::graph()
 		{
 			if (auxC->getData()->getUsuario() == "cabecera" || auxC->getData()->getUsuario() == "root")
 			{
-				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getNombre() << comillas << ", color=red, group = " << grupo << " ]; \n";
+				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getNombre() << comillas << ", color=red, group = " << comillas << auxC->getData()->getDepto() << comillas << " ]; \n";
 				auxC = auxC->getSiguiente();
 			}
 			else
 			{
-				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
+				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getInfo() << comillas << ", group = " << comillas << auxC->getData()->getDepto() << comillas << " ]; \n";
 				if (auxC != 0)
 				{
 					NodeMatriz<N> *auxZ = auxC;
 					while (auxZ->getAtras() != 0)
 					{
 						auxZ = auxZ->getAtras();
-						file << comillas << auxZ->getData() << comillas << "[ shape = box3d, label = " << comillas << auxZ->getData()->getInfo() << comillas << ", group = " << grupo << " ]; \n";
+						file << comillas << auxZ->getData() << comillas << "[ shape = box3d, label = " << comillas << auxZ->getData()->getInfo() << comillas << ", group = " << comillas << auxC->getData()->getDepto() << comillas << " ]; \n";
 					}
 				}
 				auxC = auxC->getSiguiente();

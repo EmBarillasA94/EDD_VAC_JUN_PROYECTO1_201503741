@@ -23,16 +23,20 @@ int main() {
 	
 	
 	Matriz_Dispersa<Usuario*> *Matriz = new Matriz_Dispersa<Usuario*>();
-	Usuario *user1 = new Usuario("user1", "Eddy Murga", "12456", "A", "A");
+	Usuario *user1 = new Usuario("user1", "Eddy Murga", "12456", "Depto1", "Emp1");
 	Matriz->Insertar_elemento(user1, user1->getEmpresa(), user1->getDepto());
-	Usuario *user2 = new Usuario("user2", "Alejandro barillas", "12456", "A", "E");
+	Usuario *user2 = new Usuario("user2", "Alejandro barillas", "12456", "Depto1", "Emp5");
 	Matriz->Insertar_elemento(user2, user2->getEmpresa(), user2->getDepto());
-	Usuario *user3 = new Usuario("user3", "Julio Matzar", "123456", "C", "A");
+	Usuario *user3 = new Usuario("user3", "Julio Matzar", "123456", "Depto3", "Emp1");
 	Matriz->Insertar_elemento(user3, user3->getEmpresa(), user3->getDepto());
-	Usuario *user4 = new Usuario("user4", "Jose Lopezr", "123456", "C", "B");
+	Usuario *user4 = new Usuario("user4", "Jose Lopezr", "123456", "Depto3", "Emp2");
 	Matriz->Insertar_elemento(user4, user4->getEmpresa(), user4->getDepto());
-	Usuario *user5 = new Usuario("user5", "Carlos Lopezr", "123456", "B", "E");
+	Usuario *user5 = new Usuario("user5", "Carlos Lopezr", "123456", "Depto2", "Emp5");
 	Matriz->Insertar_elemento(user5, user5->getEmpresa(), user5->getDepto());
+	Usuario *user6 = new Usuario("user6", "Mario Bros", "123456", "Depto2", "Emp2");
+	Matriz->Insertar_elemento(user6, user6->getEmpresa(), user6->getDepto());
+	Usuario *user7 = new Usuario("user7", "Zac Efron", "12456", "Depto7", "Emp6");
+	Matriz->Insertar_elemento(user7, user7->getEmpresa(), user7->getDepto());
 	Matriz->graph();
 	return 0;
 }
