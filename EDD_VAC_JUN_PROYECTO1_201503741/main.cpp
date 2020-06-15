@@ -35,7 +35,7 @@ int main() {
 	Matriz->Insertar_elemento(user5, user5->getEmpresa(), user5->getDepto());
 	Usuario *user6 = new Usuario("user6", "Mario Bros", "123456", "Depto2", "Emp2");
 	Matriz->Insertar_elemento(user6, user6->getEmpresa(), user6->getDepto());
-	Usuario *user7 = new Usuario("user7", "Zac Efron", "12456", "Depto7", "Emp6");
+	Usuario *user7 = new Usuario("user7", "Link", "12456", "Depto7", "Emp6");
 	Matriz->Insertar_elemento(user7, user7->getEmpresa(), user7->getDepto());
 	Matriz->graph();
 	return 0;
