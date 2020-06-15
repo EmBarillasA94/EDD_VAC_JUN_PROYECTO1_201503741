@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EDD\Arbol_AVL.cpp" />
     <ClCompile Include="EDD\Lista_Doble_Enlazada_Circular.cpp" />
     <ClCompile Include="EDD\Matriz_Dispersa.cpp" />
     <ClCompile Include="main.cpp" />

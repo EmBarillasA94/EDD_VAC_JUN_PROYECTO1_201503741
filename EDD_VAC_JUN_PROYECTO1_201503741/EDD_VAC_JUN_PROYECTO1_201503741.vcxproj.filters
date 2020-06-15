@@ -24,6 +24,9 @@
     <ClCompile Include="EDD\Matriz_Dispersa.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="EDD\Arbol_AVL.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
