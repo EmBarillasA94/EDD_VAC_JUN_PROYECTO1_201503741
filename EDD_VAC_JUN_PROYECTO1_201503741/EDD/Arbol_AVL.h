@@ -56,7 +56,14 @@ public:
 	Arbol_AVL<A>();
 	void Insertar(A nuevo);
 	Node_Arbol<A> *Insertar_P(Node_Arbol<A> *raiz, A nuevo);
-
+	void Actualizar(Node_Arbol<A> *nodo);
+	Node_Arbol<A> *Balancear(Node_Arbol<A> *nodo);
+	Node_Arbol<A> *izqui_izqui(Node_Arbol<A> *nodo);
+	Node_Arbol<A> *Rotar_Derec(Node_Arbol<A> *nodo);
+	Node_Arbol<A> *izqui_derec(Node_Arbol<A> *nodo);
+	Node_Arbol<A> *Rotar_Izqui(Node_Arbol<A> *nodo);
+	Node_Arbol<A> *derec_derec(Node_Arbol<A> *nodo);
+	Node_Arbol<A> *derec_izqui(Node_Arbol<A> *nodo);
 private:
 	Node_Arbol<A> *root;
 };
