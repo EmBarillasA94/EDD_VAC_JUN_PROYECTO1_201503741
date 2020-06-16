@@ -25,13 +25,13 @@ Node_Arbol<A>* Arbol_AVL<A>::Insertar_P(Node_Arbol<A>* raiz, A nuevo)
 		if (raiz->getData()->getId() < nuevo->getId())
 		{
 			raiz->setLeft(Insertar_P(raiz->getLeft(), nuevo));
-			return raiz;
 		}
 		else
 		{
 			raiz->setRight(Insertar_P(raiz->getRight(), nuevo));
-			return raiz;
 		}
 	}
+	Acturalizar(raiz);
+
 	return 0;
 }

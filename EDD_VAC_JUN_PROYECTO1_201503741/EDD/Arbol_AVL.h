@@ -36,7 +36,10 @@ public:
 		this->right = n;
 	}
 	void setAltura(int a) {
-
+		this->Altura = a;
+	}
+	void setFactor_E(int f) {
+		this->Facetor_E = f;
 	}
 private:
 	A data;
