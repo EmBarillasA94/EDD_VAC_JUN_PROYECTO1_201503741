@@ -154,3 +154,57 @@ Node_Arbol<A>* Arbol_AVL<A>::derec_izqui(Node_Arbol<A>* nodo)
 	nodo->setRight(Rotar_Derec(nodo->getRight()));
 	return derec_derec(nodo);
 }
+
+template<class A>
+void Arbol_AVL<A>::Eliminar(string id_activo)
+{
+	this->root = Eliminar_nodo(this->root, id_activo);
+}
+
+template<class A>
+Node_Arbol<A>* Arbol_AVL<A>::Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo)
+{
+	if (nodo == 0)
+	{
+		return 0;
+	}
+	else if (nodo->getData()->getId() < id_activo)
+	{
+		nodo->setLeft(Eliminar_nodo(nodo->getLeft(), id_activo));
+	}
+	else if (nodo->getData()->getId() > id_activo)
+	{
+		nodo->getRight(Eliminar_nodo(nodo->getRight(), id_activo));
+	}
+	else
+	{
+		if (nodo->getLeft() == 0)
+		{
+			return nodo->getRight();
+		}
+		else if (nodo->getRight() == 0)
+		{
+			return nodo->getLeft();
+		}
+		else
+		{
+			Node_Arbol<A> *sucesor = getSucesorDerecha(nodo->getLeft());
+			nodo->setData(sucesor->getData());
+			//nodo = sucesor;
+			//nodo->setRight(Eliminar_nodo(nodo->getRight(), id_activo));
+			nodo->setLeft(Eliminar_nodo(nodo->getLeft(), nodo->getData()->getId()));
+		}
+	}
+	Actualizar(nodo);
+	return Balancear(nodo);
+}
+
+template<class A>
+Node_Arbol<A>* Arbol_AVL<A>::getSucesorDerecha(Node_Arbol<A>* nodo)
+{
+	while (nodo->getRight() != 0)
+	{
+		nodo = nodo->getRight();
+	}
+	return nodo;
+}

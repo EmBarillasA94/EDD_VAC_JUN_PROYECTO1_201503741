@@ -41,6 +41,9 @@ public:
 	void setFactor_E(int f) {
 		this->Facetor_E = f;
 	}
+	void setData(A data_) {
+		this->data = data_;
+	}
 private:
 	A data;
 	int Altura;
@@ -64,6 +67,10 @@ public:
 	Node_Arbol<A> *Rotar_Izqui(Node_Arbol<A> *nodo);
 	Node_Arbol<A> *derec_derec(Node_Arbol<A> *nodo);
 	Node_Arbol<A> *derec_izqui(Node_Arbol<A> *nodo);
+	void Eliminar(string id_activo);
+	Node_Arbol<A> *Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo);
+	Node_Arbol<A> *getSucesorDerecha(Node_Arbol<A> *nodo);
+
 private:
 	Node_Arbol<A> *root;
 };
