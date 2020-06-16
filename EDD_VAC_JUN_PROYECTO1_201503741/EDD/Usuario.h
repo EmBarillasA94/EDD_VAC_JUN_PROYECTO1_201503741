@@ -1,6 +1,9 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
+#include "Arbol_AVL.cpp"
+#include "Activo.h"
+
 #include <iostream>
 using namespace std;
 
@@ -13,6 +16,7 @@ public:
 		this->contrasenia = contrasenia_;
 		this->depto = depto_;
 		this->empresa = empresa_;
+		this->ArbolAVL = new Arbol_AVL<Activo*>();
 	}
 	//set and get
 	string getUsuario() {
@@ -38,13 +42,16 @@ public:
 			+ this->depto + "\\l";
 		return texto;
 	}
+	void Insertar_Activo(Activo * act) {
+		this->ArbolAVL->Insertar(act);
+	}
 private:
 	string usuario;
 	string nombre;
 	string contrasenia;
 	string depto;
 	string empresa;
-	//arbol avl
+	Arbol_AVL<Activo*> *ArbolAVL;
 };
 
 #endif // !USUARIO_H
