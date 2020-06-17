@@ -202,6 +202,71 @@ bool Matriz_Dispersa<N>::Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeM
 }
 
 template<class N>
+N Matriz_Dispersa<N>::BuscarUsuario(string depto, string empresa, string usuario, string contrasenia)
+{
+	NodeMatriz<A> aux = this->root;
+	//buscamos columna
+	while (aux != 0)
+	{
+		if (aux->getColumna() == depto)
+		{
+			//columna encontrada 
+			//salimos del ciclo
+			break;
+		}
+		else
+		{
+			aux = aux->getSiguiente();
+		}
+	}
+	
+	//verificamos si recorrio todas las columnas y no la encontro
+	if (aux == 0)
+	{
+		return 0;
+	}
+	
+	//buscamos la fila
+	while (aux != 0)
+	{
+		if (aux->getFila() == empresa)
+		{
+			//fila encontrada
+			//salimos del ciclo
+			break;
+		}
+		else
+		{
+			aux = aux->getAbajo();
+		}
+	}
+
+	//verificamos si recorrio tadas las filas y no la encontro
+	if (aux == 0)
+	{
+		return 0;
+	}
+
+	//en este punto estamos solo el nodo correspondiente a la fila y la columna
+	//busamos si el dato es el que buscamos o nos vamos hacia atras para buscar en los otros
+	while (aux != 0)
+	{
+		if (aux->getData()->getUsuario() == usuario && aux->getData()->getContrasenia() == contrasenia)
+		{
+			//encontramos el dato
+			return aux->getData();
+		}
+		else
+		{
+			aux = aux->getAtras();
+		}
+	}
+
+	//si llega a este punto es decir que no lo encontro
+	return 0;
+}
+
+template<class N>
 void Matriz_Dispersa<N>::graph()
 {
 	NodeMatriz<N> *auxC = this->root;

@@ -176,7 +176,7 @@ void AgregarActivos()
 void MenuAdministrador()
 {
 	system("clear");
-	cout << "------------------------Agregar Activos------------------------" << endl;
+	cout << "------------------------Menu Administrador------------------------" << endl;
 	cout << "\t 1.- Registrar Usuario" << endl;
 	cout << "\t 2.- Reporte Matriz Dispersa" << endl;
 	cout << "\t 3.- Reporte Activos Disponibles de un Departamento" << endl;
@@ -186,7 +186,7 @@ void MenuAdministrador()
 	cout << "\t 7.- Reporte Activos Rentados por un Usuario" << endl;
 	cout << "\t 8.- Ordenar Transacciones" << endl;
 	cout << "\t 9.- Cerrar Sesion" << endl;
-	cout << "---------------------------------------------------------------" << endl;
+	cout << "------------------------------------------------------------------" << endl;
 	cout << endl;
 	cout << "Ingrese Opcioin:" << endl;
 
@@ -200,6 +200,7 @@ void MenuAdministrador()
 		break;
 	case 2:
 		//Reporte Matriz dispesa
+		
 		break;
 	case 3:
 		//Reporte Activos Disponibles de un departamento
