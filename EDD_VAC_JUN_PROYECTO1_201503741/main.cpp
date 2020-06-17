@@ -120,6 +120,7 @@ void Login()
 		if (User != 0)
 		{
 			//usuario encontrado
+			MenuUsuario(User->getUsuario());
 		}
 		else
 		{
@@ -178,9 +179,11 @@ void MenuUsuario(string Nombre_)
 		break;
 	case 7:
 		//Cerrar Sesion
+		User = 0;
+		IniciarSesion();
 		break;
 	default:
-		MenuUsuario();
+		MenuUsuario(Nombre_);
 		break;
 	}
 }

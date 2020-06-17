@@ -9,6 +9,7 @@ public:
 		this->id = id_;
 		this->nombre = nombre_;
 		this->descripcion = descripcion_;
+		this->disponible = true;
 	}
 	string getId() {
 		return id;
@@ -19,8 +20,15 @@ public:
 	void setDescripcioin(string descripcion_) {
 		this->descripcion = descripcion_;
 	}
+	void Rentar() {
+		this->disponible = false;
+	}
+	void Devolver() {
+		this->disponible = true;
+	}
 private:
 	string id;
 	string nombre;
 	string descripcion;
+	bool disponible;
 };

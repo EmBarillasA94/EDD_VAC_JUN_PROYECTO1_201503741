@@ -204,7 +204,7 @@ bool Matriz_Dispersa<N>::Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeM
 template<class N>
 N Matriz_Dispersa<N>::BuscarUsuario(string depto, string empresa, string usuario, string contrasenia)
 {
-	NodeMatriz<A> *aux = this->root;
+	NodeMatriz<N> *aux = this->root;
 	//buscamos columna
 	while (aux != 0)
 	{
