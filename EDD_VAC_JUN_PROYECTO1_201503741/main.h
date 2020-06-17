@@ -1,9 +1,13 @@
-#pragma once
+#include <iostream>
+#include <cstring>
+#include <string>
+using namespace std;
 
 int main();
+string GenerarId_Activo(int tamanio);
 void IniciarSesion();
 void Login();
-void MenuUsuario();
+void MenuUsuario(string nombre_);
 void AgregarActivos();
 void EliminarActivos();
 void ModificarActivos();

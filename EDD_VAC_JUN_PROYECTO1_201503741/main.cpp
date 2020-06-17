@@ -4,17 +4,13 @@
 #include "EDD\Matriz_Dispersa.cpp"
 #include "EDD\Usuario.h"
 
-#include <iostream>
-#include <cstring>
-#include <string>
-using namespace std;
 
 Matriz_Dispersa<Usuario*> *Matriz = new Matriz_Dispersa<Usuario*>();
+Usuario *User = 0;
 
 int main() {
 	
-	IniciarSesion();
-
+	
 	//Lista_Doble_Enlazada_Circular<Transaccion*> *Lista = new Lista_Doble_Enlazada_Circular <Transaccion*>();
 	//Transaccion *t1 = new Transaccion("activo1", "uset1", "Guate", "maxi", "04/06/2020", "2 dias");
 	//Lista->add_last(t1);
@@ -26,22 +22,40 @@ int main() {
 	
 	
 	
-	//Usuario *user1 = new Usuario("user1", "Eddy Murga", "12456", "Depto1", "Emp1");
-	//Matriz->Insertar_elemento(user1, user1->getEmpresa(), user1->getDepto());
-	//Usuario *user2 = new Usuario("user2", "Alejandro barillas", "12456", "Depto1", "Emp5");
-	//Matriz->Insertar_elemento(user2, user2->getEmpresa(), user2->getDepto());
-	//Usuario *user3 = new Usuario("user3", "Julio Matzar", "123456", "Depto3", "Emp1");
-	//Matriz->Insertar_elemento(user3, user3->getEmpresa(), user3->getDepto());
-	//Usuario *user4 = new Usuario("user4", "Jose Lopezr", "123456", "Depto3", "Emp2");
-	//Matriz->Insertar_elemento(user4, user4->getEmpresa(), user4->getDepto());
-	//Usuario *user5 = new Usuario("user5", "Carlos Lopezr", "123456", "Depto2", "Emp5");
-	//Matriz->Insertar_elemento(user5, user5->getEmpresa(), user5->getDepto());
-	//Usuario *user6 = new Usuario("user6", "Mario Bros", "123456", "Depto2", "Emp2");
-	//Matriz->Insertar_elemento(user6, user6->getEmpresa(), user6->getDepto());
-	//Usuario *user7 = new Usuario("user7", "Link", "12456", "Depto7", "Emp6");
-	//Matriz->Insertar_elemento(user7, user7->getEmpresa(), user7->getDepto());
+	Usuario *user1 = new Usuario("user1", "Eddy Murga", "12456", "Depto1", "Emp1");
+	Matriz->Insertar_elemento(user1, user1->getEmpresa(), user1->getDepto());
+	Usuario *user2 = new Usuario("user2", "Alejandro barillas", "12456", "Depto1", "Emp5");
+	Matriz->Insertar_elemento(user2, user2->getEmpresa(), user2->getDepto());
+	Usuario *user3 = new Usuario("user3", "Julio Matzar", "123456", "Depto3", "Emp1");
+	Matriz->Insertar_elemento(user3, user3->getEmpresa(), user3->getDepto());
+	Usuario *user4 = new Usuario("user4", "Jose Lopezr", "123456", "Depto3", "Emp2");
+	Matriz->Insertar_elemento(user4, user4->getEmpresa(), user4->getDepto());
+	Usuario *user5 = new Usuario("user5", "Carlos Lopezr", "123456", "Depto2", "Emp5");
+	Matriz->Insertar_elemento(user5, user5->getEmpresa(), user5->getDepto());
+	Usuario *user6 = new Usuario("user6", "Mario Bros", "123456", "Depto2", "Emp2");
+	Matriz->Insertar_elemento(user6, user6->getEmpresa(), user6->getDepto());
+	Usuario *user7 = new Usuario("user7", "Link", "12456", "Depto7", "Emp6");
+	Matriz->Insertar_elemento(user7, user7->getEmpresa(), user7->getDepto());
 	//Matriz->graph();
+
+	IniciarSesion();
 	return 0;
+}
+
+string GenerarId_Activo(int tamanio)
+{
+	auto randchar = []() -> char
+	{
+		const char charset[] =
+			"0123456789"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+			"abcdefghijklmnopqrstuvwxyz";
+		const size_t max_index = (sizeof(charset) - 1);
+		return charset[rand() % max_index];
+	};
+	string id(tamanio, 0);
+	std::generate_n(id.begin(), tamanio, randchar);
+	return id;
 }
 
 void IniciarSesion()
@@ -102,6 +116,17 @@ void Login()
 	else
 	{
 		//buscar usuario en la matriz
+		User = Matriz->BuscarUsuario(depto, empresa, usuario, contrasenia);
+		if (User != 0)
+		{
+			//usuario encontrado
+		}
+		else
+		{
+			cout << "Usuario Invalido" << endl;
+			system("pause");
+			Login();
+		}
 	}
 	
 	//cout << "usuario: " << usuario << endl;
@@ -113,10 +138,11 @@ void Login()
 
 }
 
-void MenuUsuario()
+void MenuUsuario(string Nombre_)
 {
 	system("clear");
-	cout << "---------------Nombre de Usuario---------------" << endl;
+	cout << "-----------------------------------------------" << endl;
+	cout << "\t\t" << Nombre_ << endl;
 	cout << "\t 1.- Agregar Activos" << endl;
 	cout << "\t 2.- Eliminar Activos" << endl;
 	cout << "\t 3.- Modificar Activos" << endl;
@@ -200,7 +226,8 @@ void MenuAdministrador()
 		break;
 	case 2:
 		//Reporte Matriz dispesa
-		
+		Matriz->graph();
+		MenuAdministrador();
 		break;
 	case 3:
 		//Reporte Activos Disponibles de un departamento
@@ -223,6 +250,7 @@ void MenuAdministrador()
 	case 9:
 		//Cerrar Sesion
 		IniciarSesion();
+		break;
 	default:
 		MenuAdministrador();
 		break;
@@ -243,7 +271,7 @@ void CrearUsuarios()
 	string contrasenia = "";
 	cin >> contrasenia;
 
-	cout << "Ingresar Nombre Completo:" << endl;
+	cout << "Ingresar Nombre:" << endl;
 	cout << "\t";
 	string nombre = "";
 	cin >> nombre;
