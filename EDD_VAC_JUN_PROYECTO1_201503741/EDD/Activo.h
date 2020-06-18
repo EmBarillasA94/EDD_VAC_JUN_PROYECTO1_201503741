@@ -14,6 +14,25 @@ public:
 	string getId() {
 		return id;
 	}
+	string getDatos() {
+		string text = this->id + " " + this->nombre + " " + this->descripcion;
+		return text;
+	}
+	string getInfo() {
+		string texto = "[label="+'"'+ this->id + "\\l"
+			+ this->nombre + "\\l";
+
+		if (this->disponible)
+		{
+			texto = texto + "Disponible \\l"+'"'+", color=back] \n";
+			return texto;
+		}
+		else
+		{
+			texto = texto + "No Disponible \\l" + '"' + ", color=yellow]";
+			return texto;
+		}
+	}
 	void setNombre(string nombre_) {
 		this->nombre = nombre_;
 	}

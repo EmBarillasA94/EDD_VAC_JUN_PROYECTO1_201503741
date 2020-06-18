@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <fstream>
 using namespace std;
 
 template<class A>
@@ -70,7 +71,11 @@ public:
 	void Eliminar(string id_activo);
 	Node_Arbol<A> *Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo);
 	Node_Arbol<A> *getSucesorDerecha(Node_Arbol<A> *nodo);
-
+	void Graph_Por_Usuario(string usuario_);
+	void Escribir_Encabezado(ofstream file, string usuario_);
+	void Graficar_nodos(ofstream file, Node_Arbol<A> *raiz);
+	void Enlazar_nodos(ofstream file, Node_Arbol<A> *raiz);
+	void Escribir_final(ofstream file);
 private:
 	Node_Arbol<A> *root;
 };

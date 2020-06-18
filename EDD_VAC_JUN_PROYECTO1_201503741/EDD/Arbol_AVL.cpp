@@ -18,6 +18,9 @@ Node_Arbol<A>* Arbol_AVL<A>::Insertar_P(Node_Arbol<A>* raiz, A nuevo)
 	{
 		Node_Arbol<A> *n = new Node_Arbol<A>(nuevo);
 		raiz = n;
+		cout << "Activo Agregado" << endl;
+		cout << A->getDatos() << endl;
+		system("pause");
 		return raiz;
 	}
 	else
@@ -207,4 +210,67 @@ Node_Arbol<A>* Arbol_AVL<A>::getSucesorDerecha(Node_Arbol<A>* nodo)
 		nodo = nodo->getRight();
 	}
 	return nodo;
+}
+
+char comillas = '"';
+template<class A>
+void Arbol_AVL<A>::Graph_Por_Usuario(string usuario_)
+{
+	Node *aux = this->root;
+	ofstream file;
+	Escribir_Encabezado(file, usuario_);
+	Graficar_nodos(file, aux);
+	file << comillas << usuario_ << comillas << "->" << comillas << this->root->getData() << comillas << "\n";
+	aux = this->root;
+	Enlazar_nodos(file, aux);
+	Escribir_final(file);
+}
+
+template<class A>
+void Arbol_AVL<A>::Escribir_Encabezado(ofstream file, string usuario_)
+{
+	file.open("C:\\Users\\EDDY\\Desktop\\Arbol_Usuario.txt");
+	file << "digraph G { \n";
+	file << "node[shape=box, color=red] \n";
+	file << comillas << usuario_ << comillas << "[label=" << usuario_ << "]" << "\n";
+	file << "node[shape=oval] \n";
+}
+
+template<class A>
+void Arbol_AVL<A>::Graficar_nodos(ofstream file, Node_Arbol<A>* raiz)
+{
+	if (raiz != 0)
+	{
+		file << comillas << raiz->getData() << comillas << raiz->getData()->getInfo()<< "\n";
+		Graficar_nodos(raiz->getLeft());
+		Graficar_nodos(raiz->getRight());
+	}
+}
+
+template<class A>
+void Arbol_AVL<A>::Enlazar_nodos(ofstream file, Node_Arbol<A>* raiz)
+{
+	if (raiz != 0)
+	{
+		if (raiz->getLeft() != 0)
+		{
+			file << comillas << raiz->getData() << comillas << "->" << comillas << raiz->getLeft()->getData() << comillas << "\n";
+		}
+		if (raiz->getRight() != 0)
+		{
+			file << comillas << raiz->getData() << comillas << "->" << comillas << raiz->getRight()->getData() << comillas << "\n";
+		}
+		Graficar_nodos(raiz->getLeft());
+		Graficar_nodos(raiz->getRight());
+	}
+}
+
+template<class A>
+void Arbol_AVL<A>::Escribir_final(ofstream file)
+{
+	file << "}";
+	file.close();
+
+	system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Arbol_Usuario.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Arbol_Usuario.png");
+	system("C:\\Users\\EDDY\\Desktop\\Grafica_Arbol_Usuario.png");
 }

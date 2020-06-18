@@ -161,6 +161,7 @@ void MenuUsuario(string Nombre_)
 	{
 	case 1:
 		//menu AgregarActivos
+		AgregarActivos();
 		break;
 	case 2:
 		//menu EliminarActivos
@@ -187,7 +188,7 @@ void MenuUsuario(string Nombre_)
 		break;
 	}
 }
-
+int id_act = 0;
 void AgregarActivos()
 {
 	system("clear");
@@ -200,6 +201,10 @@ void AgregarActivos()
 	cin >> descrip;
 	cout << "---------------------------------------------" << endl;
 	//ingresar el activo en el arbol avl del usuario logeado
+	Activo *Act_Nuevo = new Activo("" + id_act++, nombre, descrip);
+	User->Insertar_Activo(Act_Nuevo);
+	User->Graficar_Arbol_por_Usuario();
+	MenuUsuario(User->getUsuario());
 }
 
 void MenuAdministrador()
