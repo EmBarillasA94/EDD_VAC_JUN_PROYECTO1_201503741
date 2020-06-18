@@ -1,5 +1,5 @@
 #include "main.h"
-//#include "EDD\Lista_Doble_Enlazada_Circular.cpp"
+#include "EDD\Lista_Doble_Enlazada_Circular.cpp"
 #include "Transaccion.h"
 #include "EDD\Matriz_Dispersa.cpp"
 #include "EDD\Usuario.h"
@@ -7,11 +7,11 @@
 
 Matriz_Dispersa<Usuario*> *Matriz = new Matriz_Dispersa<Usuario*>();
 Usuario *User = 0;
+Lista_Doble_Enlazada_Circular<Transaccion*> *Lista = new Lista_Doble_Enlazada_Circular <Transaccion*>();
 
 int main() {
 	
 	
-	//Lista_Doble_Enlazada_Circular<Transaccion*> *Lista = new Lista_Doble_Enlazada_Circular <Transaccion*>();
 	//Transaccion *t1 = new Transaccion("activo1", "uset1", "Guate", "maxi", "04/06/2020", "2 dias");
 	//Lista->add_last(t1);
 	//Transaccion *t2 = new Transaccion("activo2", "uset1", "Guate", "maxi", "05/06/2020", "7 dias");
@@ -169,9 +169,11 @@ void MenuUsuario(string Nombre_)
 		break;
 	case 3: 
 		//menu ModificarActivos
+		ModificarActivos();
 		break;
 	case 4:
 		//menu RentarActivos
+		RentarActivos();
 		break;
 	case 5:
 		// menu ActivosRentados
@@ -247,6 +249,44 @@ void ModificarActivos()
 	cin >> desc_nueva;
 	User->Modifcar_Activo(id, desc_nueva);
 	MenuUsuario(User->getNombre());
+}
+
+void RentarActivos()
+{
+	system("cls");
+	cout << "---------------Catalogo de Activos---------------" << endl;
+	cout << endl;
+	Matriz->Mostrar_Activos_Disponibles(User);
+	cout << endl;
+	cout << "\t 1.- Rentar Activo" << endl;
+	cout << "\t 2.- Regresar a Menu" << endl;
+	cout << "-------------------------------------------------" << endl;
+	cout << "Ingresa una opcion:" << endl;
+	int opcion;
+	cin >> opcion;
+	if (opcion == 1)
+	{
+		cout << "Ingrese el ID del Activo:" << endl;
+		string id;
+		cin >> id;
+		cout << "Ingrese la fecha:" << endl;
+		string fecha;
+		cin >> fecha;
+		cout << "Ingrese la cantidad de dias por rentar:" << endl;
+		string dias;
+		cin >> dias;
+		//creo la transaccion
+		Transaccion *Nueva_Transaccion = new Transaccion(GenerarId(15), id, User->getUsuario(), User->getDepto(), User->getEmpresa(), fecha, dias);
+		//hay que rentar el activo
+		Matriz->Rentar_Activo(id, User);
+		//metemos la nueva transaccion a la lista
+		Lista->add_last(Nueva_Transaccion);
+		MenuUsuario(User->getUsuario());
+	}
+	else
+	{
+		MenuUsuario(User->getUsuario());
+	}
 }
 
 void MenuAdministrador()

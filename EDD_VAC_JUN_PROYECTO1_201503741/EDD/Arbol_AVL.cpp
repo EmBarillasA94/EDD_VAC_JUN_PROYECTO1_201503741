@@ -277,7 +277,64 @@ Node_Arbol<A>* Arbol_AVL<A>::Modificar_nodo(Node_Arbol<A>* nodo, string id_, str
 			//encontrado
 			nodo->getData()->setDescripcion(descripcion_);
 			cout << "Activo Modificado" << endl;
-			cout << nodo->getData()->getDatos();
+			cout << nodo->getData()->getDatos()<< endl;
+			system("pause");
+			return nodo;
+		}
+	}
+	return 0;
+}
+
+template<class A>
+void Arbol_AVL<A>::Mostrar_Activos_Disponibles()
+{
+	Node_Arbol<A> *aux = this->root;
+	Mostrar_Nodo_Act_Disponibles(aux);
+}
+
+template<class A>
+void Arbol_AVL<A>::Mostrar_Nodo_Act_Disponibles(Node_Arbol<A>* nodo)
+{
+	if (nodo != 0)
+	{
+		Mostrar_Nodo_Act_Disponibles(nodo->getLeft());
+		//verificar si esta disponible el activo
+		if (nodo->getData()->getDisponibilidad())
+		{
+			cout << nodo->getData()->getDatos() << endl;
+		}
+		cout << nodo->getData()->getDatos() << endl;
+		Mostrar_Nodo_Act_Disponibles(nodo->getRight());
+	}
+}
+
+template<class A>
+void Arbol_AVL<A>::Rentar_Activo(string id_)
+{
+	this->root = Rentar_Activo_P(this->root, id_);
+}
+
+template<class A>
+Node_Arbol<A>* Arbol_AVL<A>::Rentar_Activo_P(Node_Arbol<A>* nodo, string id_)
+{
+	if (nodo != 0)
+	{
+		if (id_ < nodo->getData()->getId())
+		{
+			nodo->setLeft(Rentar_Activo_P(nodo->getLeft(), id_));
+			return nodo;
+		}
+		else if (id_ > nodo->getData()->getId())
+		{
+			nodo->setRight(Rentar_Activo_P(nodo->getRight(), id_));
+			return nodo;
+		}
+		else
+		{
+			//encontrado
+			nodo->getData()->Rentar();
+			cout << "Activo Rentado" << endl;
+			cout << nodo->getData()->getDatos() << endl;
 			system("pause");
 			return nodo;
 		}

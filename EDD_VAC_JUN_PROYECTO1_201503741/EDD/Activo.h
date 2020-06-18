@@ -36,6 +36,9 @@ public:
 	void setNombre(string nombre_) {
 		this->nombre = nombre_;
 	}
+	bool getDisponibilidad() {
+		return this->disponible;
+	}
 	void setDescripcion(string descripcion_) {
 		this->descripcion = descripcion_;
 	}

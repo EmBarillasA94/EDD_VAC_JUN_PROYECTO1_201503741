@@ -267,6 +267,47 @@ N Matriz_Dispersa<N>::BuscarUsuario(string depto, string empresa, string usuario
 }
 
 template<class N>
+void Matriz_Dispersa<N>::Mostrar_Activos_Disponibles(N usuario)
+{
+	NodeMatriz<N> *auxF = this->root;
+	NodeMatriz<N> *auxC = this->root;
+	while (auxF ! = 0)
+	{
+		while (auxC ! = 0)
+		{
+			if (auxC->getData()->getUsuario() != usuario->getUsuario() && auxC->getData()->getUsuario() != "cabecera")
+			{
+				auxC->getData()->Mostrar_Activos_Disponibles();
+			}
+			auxC = auxC->getSiguiente();
+		}
+		auxF = auxF->getAbajo();
+		auxC = auxF;
+	}
+
+}
+
+template<class N>
+void Matriz_Dispersa<N>::Rentar_Activo(string id_Activo, N usuario)
+{
+	NodeMatriz<N> *auxF = this->root;
+	NodeMatriz<N> *auxC = this->root;
+	while (auxF != 0)
+	{
+		while (auxC != 0)
+		{
+			if (auxC->getData()->getUsuario() != usuario->getUsuario() && auxC->getData()->getUsuario() != "cabecera")
+			{
+				auxC->getData()->Rentar_Activo(id_Activo);
+			}
+			auxC = auxC->getSiguiente();
+		}
+		auxF = auxF->getAbajo();
+		auxC = auxF;
+	}
+}
+
+template<class N>
 void Matriz_Dispersa<N>::graph()
 {
 	NodeMatriz<N> *auxC = this->root;

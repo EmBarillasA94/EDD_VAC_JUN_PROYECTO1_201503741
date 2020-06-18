@@ -9,7 +9,6 @@ class Transaccion
 {
 public:
 	Transaccion(string id_Transaccion_, string id_Activo_, string usuario_, string depto_, string empresa_, string fecha_, string tiempo_) {
-		//generar id automaticamente
 		this->id_Transaccion = id_Transaccion_;
 		this->id_Activo = id_Activo_;
 		this->usuario = usuario_;

@@ -57,6 +57,12 @@ public:
 	void Eliminar_Activo(string id_activo) {
 		this->ArbolAVL->Eliminar(id_activo);
 	}
+	void Mostrar_Activos_Disponibles() {
+		this->ArbolAVL->Mostrar_Activos_Disponibles();
+	}
+	void Rentar_Activo(string id_activo) {
+		this->ArbolAVL->Rentar_Activo(id_activo);
+	}
 private:
 	string usuario;
 	string nombre;

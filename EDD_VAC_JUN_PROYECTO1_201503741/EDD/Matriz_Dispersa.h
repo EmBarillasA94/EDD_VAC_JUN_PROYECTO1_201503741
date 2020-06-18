@@ -91,6 +91,8 @@ public:
 	bool Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz<N> *nodo_nuevo_);
 	bool Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_);
 	N BuscarUsuario(string depto, string empresa, string usuario, string contrasenia);
+	void Mostrar_Activos_Disponibles(N usuario);
+	void Rentar_Activo(string id_Activo, N usuario);
 	void graph();
 private:
 	NodeMatriz<N> *root;
