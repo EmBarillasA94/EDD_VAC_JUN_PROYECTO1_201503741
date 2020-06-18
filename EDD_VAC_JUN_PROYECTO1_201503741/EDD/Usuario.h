@@ -45,8 +45,8 @@ public:
 	void Insertar_Activo(Activo * act) {
 		this->ArbolAVL->Insertar(act);
 	}
-	void Graficar_Arbol_por_Usuario() {
-		this->ArbolAVL->Graph_Por_Usuario();
+	void Graficar_Arbol_por_Usuario(string usuario_) {
+		this->ArbolAVL->Graph_Por_Usuario(usuario_);
 	}
 private:
 	string usuario;

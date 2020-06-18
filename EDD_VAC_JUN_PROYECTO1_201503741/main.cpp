@@ -60,7 +60,7 @@ string GenerarId_Activo(int tamanio)
 
 void IniciarSesion()
 {
-	system("clear");
+	system("cls");
 	cout << "---------------RENTA DE ACTIVOS---------------" << endl;
 	cout << "\t 1.- Iniciar Sesión" << endl;
 	cout << "\t 2.- Salir" << endl;
@@ -85,7 +85,7 @@ void IniciarSesion()
 
 void Login()
 {
-	system("clear");
+	system("cls");
 	cout << "---------------LOGIIN---------------" << endl;
 
 	cout << "Ingresar Usuario:" << endl;
@@ -141,7 +141,7 @@ void Login()
 
 void MenuUsuario(string Nombre_)
 {
-	system("clear");
+	system("cls");
 	cout << "-----------------------------------------------" << endl;
 	cout << "\t\t" << Nombre_ << endl;
 	cout << "\t 1.- Agregar Activos" << endl;
@@ -191,7 +191,7 @@ void MenuUsuario(string Nombre_)
 int id_act = 0;
 void AgregarActivos()
 {
-	system("clear");
+	system("cls");
 	cout << "---------------Agregar Activos---------------" << endl;
 	cout << "Ingresar Nombre:" << endl;
 	string nombre = "";
@@ -201,15 +201,16 @@ void AgregarActivos()
 	cin >> descrip;
 	cout << "---------------------------------------------" << endl;
 	//ingresar el activo en el arbol avl del usuario logeado
-	Activo *Act_Nuevo = new Activo("" + id_act++, nombre, descrip);
+	id_act++;
+	Activo *Act_Nuevo = new Activo(std::to_string(id_act), nombre, descrip);
 	User->Insertar_Activo(Act_Nuevo);
-	User->Graficar_Arbol_por_Usuario();
+	User->Graficar_Arbol_por_Usuario(User->getUsuario());
 	MenuUsuario(User->getUsuario());
 }
 
 void MenuAdministrador()
 {
-	system("clear");
+	system("cls");
 	cout << "------------------------Menu Administrador------------------------" << endl;
 	cout << "\t 1.- Registrar Usuario" << endl;
 	cout << "\t 2.- Reporte Matriz Dispersa" << endl;
@@ -267,7 +268,7 @@ void MenuAdministrador()
 
 void CrearUsuarios()
 {
-	system("clear");
+	system("cls");
 	cout << "---------------Crear Usuario---------------" << endl;
 	cout << "Ingresar Usuario:" << endl;
 	cout << "\t";

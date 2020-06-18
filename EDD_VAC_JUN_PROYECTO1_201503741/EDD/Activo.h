@@ -19,7 +19,7 @@ public:
 		return text;
 	}
 	string getInfo() {
-		string texto = "[label="+'"'+ this->id + "\\l"
+		string texto = '"'+ this->id + "\\l"
 			+ this->nombre + "\\l";
 
 		if (this->disponible)
