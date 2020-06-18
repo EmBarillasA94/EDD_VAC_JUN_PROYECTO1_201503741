@@ -271,9 +271,9 @@ void Matriz_Dispersa<N>::Mostrar_Activos_Disponibles(N usuario)
 {
 	NodeMatriz<N> *auxF = this->root;
 	NodeMatriz<N> *auxC = this->root;
-	while (auxF ! = 0)
+	while (auxF != 0)
 	{
-		while (auxC ! = 0)
+		while (auxC != 0)
 		{
 			if (auxC->getData()->getUsuario() != usuario->getUsuario() && auxC->getData()->getUsuario() != "cabecera")
 			{

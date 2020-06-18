@@ -22,19 +22,40 @@ int main() {
 	
 	
 	
-	Usuario *user1 = new Usuario("user1", "Eddy Murga", "12456", "Depto1", "Emp1");
+	Usuario *user1 = new Usuario("user1", "Eddy Murga", "123456", "Depto1", "Emp1");
+	user1->Insertar_Activo(new Activo(GenerarId(15), "carro", "carro 4 puertas"));
+	user1->Insertar_Activo(new Activo(GenerarId(15), "casa", "casa 2 niveles"));
+	user1->Insertar_Activo(new Activo(GenerarId(15), "mesa", "mesa de metal"));
 	Matriz->Insertar_elemento(user1, user1->getEmpresa(), user1->getDepto());
-	Usuario *user2 = new Usuario("user2", "Alejandro barillas", "12456", "Depto1", "Emp5");
+	
+	Usuario *user2 = new Usuario("user2", "Alejandro barillas", "123456", "Depto1", "Emp5");
+	user2->Insertar_Activo(new Activo(GenerarId(15), "silla", "silla"));
+	user2->Insertar_Activo(new Activo(GenerarId(15), "lapiz", "lapiz"));
+	user2->Insertar_Activo(new Activo(GenerarId(15), "calculadora", "calculadora"));
 	Matriz->Insertar_elemento(user2, user2->getEmpresa(), user2->getDepto());
+
 	Usuario *user3 = new Usuario("user3", "Julio Matzar", "123456", "Depto3", "Emp1");
+	user3->Insertar_Activo(new Activo(GenerarId(15), "laptop", "laptop"));
+	user3->Insertar_Activo(new Activo(GenerarId(15), "canionera", "canionera"));
+	user3->Insertar_Activo(new Activo(GenerarId(15), "monitor", "monitor"));
 	Matriz->Insertar_elemento(user3, user3->getEmpresa(), user3->getDepto());
+	
 	Usuario *user4 = new Usuario("user4", "Jose Lopezr", "123456", "Depto3", "Emp2");
 	Matriz->Insertar_elemento(user4, user4->getEmpresa(), user4->getDepto());
+	
 	Usuario *user5 = new Usuario("user5", "Carlos Lopezr", "123456", "Depto2", "Emp5");
 	Matriz->Insertar_elemento(user5, user5->getEmpresa(), user5->getDepto());
+	
 	Usuario *user6 = new Usuario("user6", "Mario Bros", "123456", "Depto2", "Emp2");
+	user6->Insertar_Activo(new Activo(GenerarId(15), "ropa", "ropa"));
+	user6->Insertar_Activo(new Activo(GenerarId(15), "Sombrero", "Sombrero"));
+	user6->Insertar_Activo(new Activo(GenerarId(15), "Capa", "Capa"));
 	Matriz->Insertar_elemento(user6, user6->getEmpresa(), user6->getDepto());
-	Usuario *user7 = new Usuario("user7", "Link", "12456", "Depto7", "Emp6");
+	
+	Usuario *user7 = new Usuario("user7", "Link", "123456", "Depto7", "Emp6");
+	user7->Insertar_Activo(new Activo(GenerarId(15), "pokebola", "pokebola"));
+	user7->Insertar_Activo(new Activo(GenerarId(15), "pokedex", "pokedex"));
+	user7->Insertar_Activo(new Activo(GenerarId(15), "posion", "posion"));
 	Matriz->Insertar_elemento(user7, user7->getEmpresa(), user7->getDepto());
 	//Matriz->graph();
 
@@ -187,7 +208,7 @@ void MenuUsuario(string Nombre_)
 		IniciarSesion();
 		break;
 	default:
-		MenuUsuario(Nombre_);
+		//MenuUsuario(Nombre_);
 		break;
 	}
 }
@@ -225,7 +246,7 @@ void EliminarActivos()
 	if (id_activo != "salir")
 	{
 		User->Eliminar_Activo(id_activo);
-		User->Graficar_Arbol_por_Usuario(User->getUsuario());
+		//User->Graficar_Arbol_por_Usuario(User->getUsuario());
 		EliminarActivos();
 	}
 	else
@@ -315,7 +336,7 @@ void MenuAdministrador()
 		CrearUsuarios();
 		break;
 	case 2:
-		//Reporte Matriz dispesa
+		//Reporte Matriz dispersa
 		Matriz->graph();
 		MenuAdministrador();
 		break;

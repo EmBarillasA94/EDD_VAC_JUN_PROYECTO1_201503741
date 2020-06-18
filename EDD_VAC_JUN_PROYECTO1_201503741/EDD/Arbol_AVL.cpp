@@ -303,7 +303,7 @@ void Arbol_AVL<A>::Mostrar_Nodo_Act_Disponibles(Node_Arbol<A>* nodo)
 		{
 			cout << nodo->getData()->getDatos() << endl;
 		}
-		cout << nodo->getData()->getDatos() << endl;
+		//cout << nodo->getData()->getDatos() << endl;
 		Mostrar_Nodo_Act_Disponibles(nodo->getRight());
 	}
 }
