@@ -26,7 +26,7 @@ Node_Arbol<A>* Arbol_AVL<A>::Insertar_P(Node_Arbol<A>* raiz, A nuevo)
 	}
 	else
 	{
-		if (raiz->getData()->getId() < nuevo->getId())
+		if (raiz->getData()->getId() > nuevo->getId())
 		{
 			raiz->setLeft(Insertar_P(raiz->getLeft(), nuevo));
 		}
@@ -67,7 +67,7 @@ void Arbol_AVL<A>::Actualizar(Node_Arbol<A>* nodo)
 	}
 
 	//evaluo cual de las 2 alturas es mayor y envio esa altura al nodo
-	if (Al_izquierda <= Al_derecha)
+	if (Al_izquierda >= Al_derecha)
 	{
 		nodo->setAltura(1 + Al_izquierda);
 	}
