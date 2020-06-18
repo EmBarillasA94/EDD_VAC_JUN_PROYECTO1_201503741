@@ -16,3 +16,4 @@ void ActivosRentados();
 void MisActivosRentados();
 void MenuAdministrador();
 void CrearUsuarios();
+void ReporteActivosPorUsuario();

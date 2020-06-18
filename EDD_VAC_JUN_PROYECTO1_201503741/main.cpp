@@ -397,10 +397,12 @@ void MenuAdministrador()
 		break;
 	case 6:
 		//Reporte Activos de un usuario
+
 		break;
 	case 7:
 		//Reporte Activos rentados por un usuario
-
+		ReporteActivosPorUsuario();
+		MenuAdministrador();
 		break;
 	case 8:
 		//Ordenar Transacciones
@@ -462,4 +464,19 @@ void CrearUsuarios()
 		system("pause");
 		MenuAdministrador();
 	}
+}
+
+void ReporteActivosPorUsuario()
+{
+	cout << endl;
+	cout << "Ingrese el usuario:" << endl;
+	string usu;
+	cin >> usu;
+	cout << "Ingrese la empresa:" << endl;
+	string emp;
+	cin >> emp;
+	cout << "Ingrese el departamento:" << endl;
+	string depto;
+	cin >> depto;
+	Lista->graph_por_Usuario(usu, emp, depto);
 }

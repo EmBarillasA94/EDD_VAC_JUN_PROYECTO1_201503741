@@ -149,11 +149,11 @@ void Lista_Doble_Enlazada_Circular<T>::graph()
 	{
 		if (aux->getData()->getEstado_Devolucion())
 		{
-			file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "colo=green]" << endl;
+			file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << ", color=green]" << endl;
 		}
 		else
 		{
-			file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "colo=red]" << endl;
+			file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << ", color=red]" << endl;
 		}
 		aux = aux->getNext();
 	}
@@ -186,13 +186,13 @@ void Lista_Doble_Enlazada_Circular<T>::graph_por_Usuario(string usuario_, string
 	{
 		if (aux->getData()->getUsuario() == usuario_ && aux->getData()->getEmpresa() == empresa_ && aux->getData()->getDepto() == depto_)
 		{
-			if (aux->getData()->getDatos_Transaccion())
+			if (aux->getData()->getEstado_Devolucion())
 			{
-				file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "colo=green]" << endl;
+				file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << ", color=green]" << endl;
 			}
 			else
 			{
-				file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "colo=red]" << endl;
+				file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << ", color=red]" << endl;
 			}
 		}
 		aux = aux->getNext();
