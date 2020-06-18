@@ -69,6 +69,8 @@ public:
 	Node_Arbol<A> *Rotar_Izqui(Node_Arbol<A> *nodo);
 	Node_Arbol<A> *derec_derec(Node_Arbol<A> *nodo);
 	Node_Arbol<A> *derec_izqui(Node_Arbol<A> *nodo);
+	void Mostrar_Activos();
+	void Mostrar_por_Nodo(Node_Arbol<A> *nodo);
 	void Eliminar(string id_activo);
 	Node_Arbol<A> *Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo);
 	Node_Arbol<A> *getSucesorDerecha(Node_Arbol<A> *nodo);

@@ -15,7 +15,7 @@ public:
 		return id;
 	}
 	string getDatos() {
-		string text = this->id + " " + this->nombre + " " + this->descripcion;
+		string text = "ID = " + this->id + " ; Nombre = " + this->nombre + " ; Descripcion = " + this->descripcion;
 		return text;
 	}
 	string getInfo() {

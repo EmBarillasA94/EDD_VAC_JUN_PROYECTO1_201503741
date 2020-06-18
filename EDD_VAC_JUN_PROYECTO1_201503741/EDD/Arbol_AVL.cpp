@@ -160,6 +160,25 @@ Node_Arbol<A>* Arbol_AVL<A>::derec_izqui(Node_Arbol<A>* nodo)
 }
 
 template<class A>
+void Arbol_AVL<A>::Mostrar_Activos()
+{
+	Node_Arbol<A> *aux = this->root;
+	Mostrar_por_Nodo(aux);
+}
+
+template<class A>
+void Arbol_AVL<A>::Mostrar_por_Nodo(Node_Arbol<A>* nodo)
+{
+	if (nodo != 0)
+	{
+		Mostrar_por_Nodo(nodo->getLeft());
+		//imprimir
+		cout << nodo->getData()->getDatos() << endl;
+		Mostrar_por_Nodo(nodo->getRight());
+	}
+}
+
+template<class A>
 void Arbol_AVL<A>::Eliminar(string id_activo)
 {
 	this->root = Eliminar_nodo(this->root, id_activo);
@@ -172,13 +191,13 @@ Node_Arbol<A>* Arbol_AVL<A>::Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo
 	{
 		return 0;
 	}
-	else if (nodo->getData()->getId() < id_activo)
+	else if (id_activo < nodo->getData()->getId())
 	{
 		nodo->setLeft(Eliminar_nodo(nodo->getLeft(), id_activo));
 	}
-	else if (nodo->getData()->getId() > id_activo)
+	else if (id_activo > nodo->getData()->getId())
 	{
-		nodo->getRight(Eliminar_nodo(nodo->getRight(), id_activo));
+		nodo->setRight(Eliminar_nodo(nodo->getRight(), id_activo));
 	}
 	else
 	{

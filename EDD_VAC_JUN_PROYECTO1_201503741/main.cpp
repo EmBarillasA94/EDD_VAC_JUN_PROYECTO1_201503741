@@ -42,7 +42,7 @@ int main() {
 	return 0;
 }
 
-string GenerarId_Activo(int tamanio)
+string GenerarId(int tamanio)
 {
 	auto randchar = []() -> char
 	{
@@ -152,7 +152,7 @@ void MenuUsuario(string Nombre_)
 	cout << "\t 6.- Mis Activos Rentados" << endl;
 	cout << "\t 7.- Cerrar Sesión" << endl;
 	cout << "-----------------------------------------------" << endl;
-	cout << "Ingrese Opción:" << endl;
+	cout << "Ingrese Opcion:" << endl;
 	
 	int opcion;
 	cin >> opcion;
@@ -165,6 +165,7 @@ void MenuUsuario(string Nombre_)
 		break;
 	case 2:
 		//menu EliminarActivos
+		EliminarActivos();
 		break;
 	case 3: 
 		//menu ModificarActivos
@@ -188,7 +189,7 @@ void MenuUsuario(string Nombre_)
 		break;
 	}
 }
-int id_act = 0;
+
 void AgregarActivos()
 {
 	system("cls");
@@ -196,16 +197,38 @@ void AgregarActivos()
 	cout << "Ingresar Nombre:" << endl;
 	string nombre = "";
 	cin >> nombre;
-	cout << "Ingresar Descripción:" << endl;
+	cout << "Ingresar Descripcion:" << endl;
 	string descrip = "";
 	cin >> descrip;
 	cout << "---------------------------------------------" << endl;
 	//ingresar el activo en el arbol avl del usuario logeado
-	id_act++;
-	Activo *Act_Nuevo = new Activo(std::to_string(id_act), nombre, descrip);
+	Activo *Act_Nuevo = new Activo(GenerarId(15), nombre, descrip);
 	User->Insertar_Activo(Act_Nuevo);
 	User->Graficar_Arbol_por_Usuario(User->getUsuario());
 	MenuUsuario(User->getUsuario());
+}
+
+void EliminarActivos()
+{
+	system("cls");
+	cout << "---------------Eliminar Activos---------------" << endl;
+	User->Mostrar_Activos();
+	cout << "----------------------------------------------" << endl;
+	cout << "Ingrese el ID activo a eliminar:" << endl;
+	cout << "(Escriba salir para regresar):" << endl;
+
+	string id_activo;
+	cin >> id_activo;
+	if (id_activo != "salir")
+	{
+		User->Eliminar_Activo(id_activo);
+		EliminarActivos();
+		User->Graficar_Arbol_por_Usuario(User->getUsuario());
+	}
+	else
+	{
+		MenuUsuario(User->getNombre());
+	}
 }
 
 void MenuAdministrador()

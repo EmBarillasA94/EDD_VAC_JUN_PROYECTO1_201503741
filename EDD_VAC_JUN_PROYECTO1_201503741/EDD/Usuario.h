@@ -45,8 +45,14 @@ public:
 	void Insertar_Activo(Activo * act) {
 		this->ArbolAVL->Insertar(act);
 	}
+	void Mostrar_Activos() {
+		this->ArbolAVL->Mostrar_Activos();
+	}
 	void Graficar_Arbol_por_Usuario(string usuario_) {
 		this->ArbolAVL->Graph_Por_Usuario(usuario_);
+	}
+	void Eliminar_Activo(string id_activo) {
+		this->ArbolAVL->Eliminar(id_activo);
 	}
 private:
 	string usuario;

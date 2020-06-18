@@ -4,7 +4,7 @@
 using namespace std;
 
 int main();
-string GenerarId_Activo(int tamanio);
+string GenerarId(int tamanio);
 void IniciarSesion();
 void Login();
 void MenuUsuario(string nombre_);
