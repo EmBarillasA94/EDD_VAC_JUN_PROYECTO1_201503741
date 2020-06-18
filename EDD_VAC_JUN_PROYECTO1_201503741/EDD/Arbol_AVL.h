@@ -75,7 +75,7 @@ public:
 	Node_Arbol<A> *Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo, bool eliminado);
 	Node_Arbol<A> *getSucesorDerecha(Node_Arbol<A> *nodo);
 	void Modificar_Activo(string id_ ,string descripcion_);
-	void Modificar_nodo(Node_Arbol<A> *nodo, string id_, string descripcion_);
+	Node_Arbol<A> *Modificar_nodo(Node_Arbol<A> *nodo, string id_, string descripcion_);
 	void Graph_Por_Usuario(string usuario_);
 	ofstream file;
 	void Escribir_Encabezado(string usuario_);

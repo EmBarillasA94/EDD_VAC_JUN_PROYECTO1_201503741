@@ -258,17 +258,19 @@ void Arbol_AVL<A>::Modificar_Activo(string id_, string descripcion_)
 }
 
 template<class A>
-void Arbol_AVL<A>::Modificar_nodo(Node_Arbol<A>* nodo, string id_, string descripcion_)
+Node_Arbol<A>* Arbol_AVL<A>::Modificar_nodo(Node_Arbol<A>* nodo, string id_, string descripcion_)
 {
 	if (nodo != 0)
 	{
 		if (id_ < nodo->getData()->getId())
 		{
 			nodo->setLeft(Modificar_nodo(nodo->getLeft(), id_, descripcion_));
+			return nodo;
 		}
 		else if (id_ > nodo->getData()->getId())
 		{
 			nodo->setRight(Modificar_nodo(nodo->getRight(), id_, descripcion_));
+			return nodo;
 		}
 		else
 		{
@@ -277,10 +279,11 @@ void Arbol_AVL<A>::Modificar_nodo(Node_Arbol<A>* nodo, string id_, string descri
 			cout << "Activo Modificado" << endl;
 			cout << nodo->getData()->getDatos();
 			system("pause");
+			return nodo;
 		}
 	}
+	return 0;
 }
-
 
 template<class A>
 void Arbol_AVL<A>::Graph_Por_Usuario(string usuario_)
