@@ -36,7 +36,7 @@ public:
 	void setNombre(string nombre_) {
 		this->nombre = nombre_;
 	}
-	void setDescripcioin(string descripcion_) {
+	void setDescripcion(string descripcion_) {
 		this->descripcion = descripcion_;
 	}
 	void Rentar() {

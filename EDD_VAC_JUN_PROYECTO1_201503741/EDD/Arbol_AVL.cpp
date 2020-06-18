@@ -181,11 +181,11 @@ void Arbol_AVL<A>::Mostrar_por_Nodo(Node_Arbol<A>* nodo)
 template<class A>
 void Arbol_AVL<A>::Eliminar(string id_activo)
 {
-	this->root = Eliminar_nodo(this->root, id_activo);
+	this->root = Eliminar_nodo(this->root, id_activo, true);
 }
 
 template<class A>
-Node_Arbol<A>* Arbol_AVL<A>::Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo)
+Node_Arbol<A>* Arbol_AVL<A>::Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo, bool mostrar)
 {
 	if (nodo == 0)
 	{
@@ -193,20 +193,32 @@ Node_Arbol<A>* Arbol_AVL<A>::Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo
 	}
 	else if (id_activo < nodo->getData()->getId())
 	{
-		nodo->setLeft(Eliminar_nodo(nodo->getLeft(), id_activo));
+		nodo->setLeft(Eliminar_nodo(nodo->getLeft(), id_activo, mostrar));
 	}
 	else if (id_activo > nodo->getData()->getId())
 	{
-		nodo->setRight(Eliminar_nodo(nodo->getRight(), id_activo));
+		nodo->setRight(Eliminar_nodo(nodo->getRight(), id_activo, mostrar));
 	}
 	else
 	{
 		if (nodo->getLeft() == 0)
 		{
+			if (mostrar)
+			{
+				cout << "Activo Eliminado" << endl;
+				cout << nodo->getData()->getDatos() << endl;
+				system("pause");
+			}
 			return nodo->getRight();
 		}
 		else if (nodo->getRight() == 0)
 		{
+			if (mostrar)
+			{
+				cout << "Activo Eliminado" << endl;
+				cout << nodo->getData()->getDatos() << endl;
+				system("pause");
+			}
 			return nodo->getLeft();
 		}
 		else
@@ -215,7 +227,13 @@ Node_Arbol<A>* Arbol_AVL<A>::Eliminar_nodo(Node_Arbol<A> *nodo, string id_activo
 			nodo->setData(sucesor->getData());
 			//nodo = sucesor;
 			//nodo->setRight(Eliminar_nodo(nodo->getRight(), id_activo));
-			nodo->setLeft(Eliminar_nodo(nodo->getLeft(), nodo->getData()->getId()));
+			if (mostrar)
+			{
+				cout << "Activo Eliminado" << endl;
+				cout << nodo->getData()->getDatos() << endl;
+				system("pause");
+			}
+			nodo->setLeft(Eliminar_nodo(nodo->getLeft(), nodo->getData()->getId(), false));
 		}
 	}
 	Actualizar(nodo);
@@ -230,6 +248,37 @@ Node_Arbol<A>* Arbol_AVL<A>::getSucesorDerecha(Node_Arbol<A>* nodo)
 		nodo = nodo->getRight();
 	}
 	return nodo;
+}
+
+template<class A>
+void Arbol_AVL<A>::Modificar_Activo(string id_, string descripcion_)
+{
+	Node_Arbol<A> *aux = this->root;
+	Modificar_nodo(aux, id_, descripcion_);
+}
+
+template<class A>
+void Arbol_AVL<A>::Modificar_nodo(Node_Arbol<A>* nodo, string id_, string descripcion_)
+{
+	if (nodo != 0)
+	{
+		if (id_ < nodo->getData()->getId())
+		{
+			nodo->setLeft(Modificar_nodo(nodo->getLeft(), id_, descripcion_));
+		}
+		else if (id_ > nodo->getData()->getId())
+		{
+			nodo->setRight(Modificar_nodo(nodo->getRight(), id_, descripcion_));
+		}
+		else
+		{
+			//encontrado
+			nodo->getData()->setDescripcion(descripcion_);
+			cout << "Activo Modificado" << endl;
+			cout << nodo->getData()->getDatos();
+			system("pause");
+		}
+	}
 }
 
 

@@ -48,6 +48,9 @@ public:
 	void Mostrar_Activos() {
 		this->ArbolAVL->Mostrar_Activos();
 	}
+	void Modifcar_Activo(string id_, string descripcion_) {
+		this->ArbolAVL->Modificar_Activo(id_, descripcion_);
+	}
 	void Graficar_Arbol_por_Usuario(string usuario_) {
 		this->ArbolAVL->Graph_Por_Usuario(usuario_);
 	}

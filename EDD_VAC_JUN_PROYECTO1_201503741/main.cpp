@@ -204,7 +204,7 @@ void AgregarActivos()
 	//ingresar el activo en el arbol avl del usuario logeado
 	Activo *Act_Nuevo = new Activo(GenerarId(15), nombre, descrip);
 	User->Insertar_Activo(Act_Nuevo);
-	User->Graficar_Arbol_por_Usuario(User->getUsuario());
+	//User->Graficar_Arbol_por_Usuario(User->getUsuario());
 	MenuUsuario(User->getUsuario());
 }
 
@@ -212,6 +212,7 @@ void EliminarActivos()
 {
 	system("cls");
 	cout << "---------------Eliminar Activos---------------" << endl;
+	cout << endl;
 	User->Mostrar_Activos();
 	cout << "----------------------------------------------" << endl;
 	cout << "Ingrese el ID activo a eliminar:" << endl;
@@ -222,13 +223,30 @@ void EliminarActivos()
 	if (id_activo != "salir")
 	{
 		User->Eliminar_Activo(id_activo);
-		EliminarActivos();
 		User->Graficar_Arbol_por_Usuario(User->getUsuario());
+		EliminarActivos();
 	}
 	else
 	{
 		MenuUsuario(User->getNombre());
 	}
+}
+
+void ModificarActivos()
+{
+	system("cls");
+	cout << "---------------Modificar Activos---------------" << endl;
+	cout << endl;
+	User->Mostrar_Activos();
+	cout << "-----------------------------------------------" << endl;
+	cout << "Ingrese el ID activo a Modificar:" << endl;
+	string id;
+	cin >> id;
+	cout << "Ingrese la descripcion nueva:" << endl;
+	string desc_nueva;
+	cin >> desc_nueva;
+	User->Modifcar_Activo(id, desc_nueva);
+	MenuUsuario(User->getNombre());
 }
 
 void MenuAdministrador()
