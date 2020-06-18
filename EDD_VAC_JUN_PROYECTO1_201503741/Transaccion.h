@@ -55,6 +55,12 @@ public:
 	string getUsuario() {
 		return this->usuario;
 	}
+	string getEmpresa() {
+		return this->empresa;
+	}
+	string getDepto() {
+		return this->depto;
+	}
 	void Devolver_Activo() {
 		this->devuelto = "Si";
 	}

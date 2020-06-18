@@ -170,3 +170,51 @@ void Lista_Doble_Enlazada_Circular<T>::graph()
 	system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Lista_Enlazada_Circular.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Lista_Enlazada_Circular.png");
 	system("C:\\Users\\EDDY\\Desktop\\Grafica_Lista_Enlazada_Circular.png");
 }
+
+template<class T>
+void Lista_Doble_Enlazada_Circular<T>::graph_por_Usuario(string usuario_, string empresa_, string depto_)
+{
+	Node<T> *aux = this->firts;
+	ofstream file;
+	char comillas = '"';
+	file.open("C:\\Users\\EDDY\\Desktop\\Lista_Enlazada_Circular_por_Usuario.txt");
+	file << "digraph G { \n";
+	file << "rankdir = LR \n";
+	file << "node[shape = box] \n";
+	bool bandera = false;
+	for (int i = 0; i < this->size; i++)
+	{
+		if (aux->getData()->getUsuario() == usuario_ && aux->getData()->getEmpresa() == empresa_ && aux->getData()->getDepto() == depto_)
+		{
+			if (aux->getData()->getDatos_Transaccion())
+			{
+				file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "colo=green]" << endl;
+			}
+			else
+			{
+				file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "colo=red]" << endl;
+			}
+		}
+		aux = aux->getNext();
+	}
+	aux = this->firts;
+	for (int i = 0; i < this->size; i++)
+	{
+		if (aux->getData()->getUsuario() == usuario_ && aux->getData()->getEmpresa() == empresa_ && aux->getData()->getDepto() == depto_)
+		{
+			if (bandera)
+			{
+				file << "->";
+			}
+			file << comillas << aux->getData() << comillas;
+			bandera = true;
+		}
+		aux = aux->getNext();
+	}
+	file << "\n";
+	file << "}";
+	file.close();
+
+	system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Lista_Enlazada_Circular_por_Usuario.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Lista_Enlazada_Circular_por_Usuario.png");
+	system("C:\\Users\\EDDY\\Desktop\\Grafica_Lista_Enlazada_Circular_por_Usuario.png");
+}

@@ -53,6 +53,7 @@ public:
 	void Mostrar_Transacciones_de_Usuario(string usuario_);
 	void Registrar_Devolucion(string id_Activo, string usuario);
 	void graph();
+	void graph_por_Usuario(string usuario_, string empresa_, string depto_);
 
 private:
 	Node<T> *firts;
