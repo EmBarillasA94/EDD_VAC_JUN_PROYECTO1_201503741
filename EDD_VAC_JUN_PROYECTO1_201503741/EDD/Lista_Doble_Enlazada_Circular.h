@@ -18,7 +18,7 @@ public:
 		return next;
 	}
 
-	Node *getLast() {
+	Node *getBefore() {
 		return before;
 	}
 
@@ -50,6 +50,8 @@ public:
 	void add_firts(T data_);
 	void add_last(T data_);
 	void eliminiar(string id_);
+	void Mostrar_Transacciones_de_Usuario(string usuario_);
+	void Registrar_Devolucion(string id_Activo, string usuario);
 	void graph();
 
 private:

@@ -106,6 +106,35 @@ void Lista_Doble_Enlazada_Circular<T>::eliminiar(string id_)
 }
 
 template<class T>
+void Lista_Doble_Enlazada_Circular<T>::Mostrar_Transacciones_de_Usuario(string usuario_)
+{
+	Node<T> *aux = this->firts;
+	for (int i = 0; i < this->size; i++)
+	{
+		if (aux->getData()->getUsuario() == usuario_ && !aux->getData()->getEstado_Devolucion())
+		{
+			//imprimir en consola la transaccion
+			cout << aux->getData()->getDatos_Transaccion() << endl;
+		}
+		aux = aux->getNext();
+	}
+}
+
+template<class T>
+void Lista_Doble_Enlazada_Circular<T>::Registrar_Devolucion(string id_Activo, string usuario)
+{
+	Node<T> *aux = this->firts;
+	for (int i = 0; i < this->size; i++)
+	{
+		if (aux->getData()->getId_Activo() == id_Activo && aux->getData()->getUsuario() == usuario && !aux->getData()->getEstado_Devolucion())
+		{
+			aux->getData()->Devolver_Activo();
+		}
+		aux = aux->getNext();
+	}
+}
+
+template<class T>
 void Lista_Doble_Enlazada_Circular<T>::graph()
 {
 	Node<T> *aux = this->firts;
@@ -118,7 +147,14 @@ void Lista_Doble_Enlazada_Circular<T>::graph()
 
 	for (int i = 0; i < this->size; i++)
 	{
-		file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "]" << endl;
+		if (aux->getData()->getEstado_Devolucion())
+		{
+			file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "colo=green]" << endl;
+		}
+		else
+		{
+			file << comillas << aux->getData() << comillas << "[label=" << comillas << aux->getData()->getInfo() << comillas << "colo=red]" << endl;
+		}
 		aux = aux->getNext();
 	}
 	aux = this->firts;

@@ -16,6 +16,7 @@ public:
 		this->empresa = empresa_;
 		this->fecha = fecha_;
 		this->tiempo = tiempo_;
+		this->devuelto = "No";
 	}
 	
 	//getters and setters 
@@ -26,17 +27,45 @@ public:
 			+ "Departamento: "+ this->depto + "\\l" 
 			+ "Empresa: "+ this->empresa + "\\l" 
 			+ "Fecha: "+ this->fecha + "\\l" 
-			+ "Tiempo Rentado: " + this->tiempo + "\\l";
+			+ "Tiempo Rentado: " + this->tiempo + "\\l"
+			+ "Devuelto: " + this->devuelto + "\\l";
 		return texto;
 	}
-
+	bool getEstado_Devolucion() {
+		if (this->devuelto == "Si")
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	string getDatos_Transaccion() {
+		string text = "Id Activo = " + this->id_Activo + " ; Nombre = " + " ; Tiempo de Renta = " + this->tiempo;
+		return text;
+	}
+	
+	string getId_Transaccion() {
+		return this->id_Transaccion;
+	}
+	string getId_Activo() {
+		return this->id_Activo;
+	}
+	string getUsuario() {
+		return this->usuario;
+	}
+	void Devolver_Activo() {
+		this->devuelto = "Si";
+	}
 private:
-	string id_Transaccion;//se genera automaticamente
+	string id_Transaccion;
 	string id_Activo;
 	string usuario;
 	string depto;
 	string empresa;
 	string fecha;
 	string tiempo;
+	string devuelto;
 };
 #endif // !TRANSACCION_H

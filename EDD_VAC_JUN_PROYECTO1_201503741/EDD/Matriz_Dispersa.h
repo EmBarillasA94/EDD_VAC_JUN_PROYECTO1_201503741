@@ -93,6 +93,8 @@ public:
 	N BuscarUsuario(string depto, string empresa, string usuario, string contrasenia);
 	void Mostrar_Activos_Disponibles(N usuario);
 	void Rentar_Activo(string id_Activo, N usuario);
+	void Devolver_Activo(string id_Activo, N usuario);
+	void Nombre_Activo(string id_act);
 	void graph();
 private:
 	NodeMatriz<N> *root;

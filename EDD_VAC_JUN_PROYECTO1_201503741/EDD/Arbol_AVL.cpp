@@ -343,6 +343,113 @@ Node_Arbol<A>* Arbol_AVL<A>::Rentar_Activo_P(Node_Arbol<A>* nodo, string id_)
 }
 
 template<class A>
+void Arbol_AVL<A>::Devolver_Activo(string id_)
+{
+	this->root = Devolver_Activo_P(this->root, id_);
+}
+
+template<class A>
+Node_Arbol<A>* Arbol_AVL<A>::Devolver_Activo_P(Node_Arbol<A>* nodo, string id_)
+{
+	if (nodo != 0)
+	{
+		if (id_ < nodo->getData()->getId())
+		{
+			nodo->setLeft(Devolver_Activo_P(nodo->getLeft(), id_));
+			return nodo;
+		}
+		else if (id_ > nodo->getData()->getId())
+		{
+			nodo->setRight(Devolver_Activo_P(nodo->getRight(), id_));
+			return nodo;
+		}
+		else
+		{
+			//encontrado
+			nodo->getData()->Devolver();
+			cout << "Activo Devuelto:" << endl;
+			cout << nodo->getData()->getDatos() << endl;
+			system("pause");
+			return nodo;
+		}
+	}
+	return 0;
+}
+
+template<class A>
+A Arbol_AVL<A>::Buscar_Activo(string id_)
+{
+	Node_Arbol<A> *aux = this->root;
+	return Buscar_Act_P(aux, id_);
+}
+
+template<class A>
+A Arbol_AVL<A>::Buscar_Act_P(Node_Arbol<A>* nodo, string id_)
+{
+	Node_Arbol<A> *actual = nodo;
+	while (actual != 0)
+	{
+		if (id_ == actual->getData()->getId()) {
+			//encontrado
+			break;
+		}
+		else if (id_ < actual->getData()->getId())
+		{
+			actual = actual->getLeft();
+		}
+		else if (id_ > actual->getData()->getId())
+		{
+			actual = actual->getRight();
+		}
+	}
+	return actual->getData();
+}
+
+template<class A>
+void Arbol_AVL<A>::Mostrar_Activos_Rentados()
+{
+	Node_Arbol<A> *aux = this->root;
+	Mostrar_Nodos_Activos_Rentados(aux);
+}
+
+template<class A>
+void Arbol_AVL<A>::Mostrar_Nodos_Activos_Rentados(Node_Arbol<A>* nodo)
+{
+	if (nodo != 0)
+	{
+		Mostrar_Nodos_Activos_Rentados(nodo->getLeft());
+		//verificar si esta disponible el activo
+		if (!nodo->getData()->getDisponibilidad())
+		{
+			cout << nodo->getData()->getDatos() << endl;
+		}
+		//cout << nodo->getData()->getDatos() << endl;
+		Mostrar_Nodos_Activos_Rentados(nodo->getRight());
+	}
+}
+
+template<class A>
+void Arbol_AVL<A>::Nombre_Activo(string id_Act)
+{
+	Node_Arbol<A> *actual = this->root;
+	while (actual != 0)
+	{
+		if (id_Act == actual->getData()->getId()) {
+			//encontrado
+			cout << actual->getData()->getNombre();
+		}
+		else if (id_Act < actual->getData()->getId())
+		{
+			actual = actual->getLeft();
+		}
+		else if (id_Act > actual->getData()->getId())
+		{
+			actual = actual->getRight();
+		}
+	}
+}
+
+template<class A>
 void Arbol_AVL<A>::Graph_Por_Usuario(string usuario_)
 {
 	Node_Arbol<A> *aux = this->root;

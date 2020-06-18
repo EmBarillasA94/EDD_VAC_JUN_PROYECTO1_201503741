@@ -188,7 +188,7 @@ void MenuUsuario(string Nombre_)
 		//menu EliminarActivos
 		EliminarActivos();
 		break;
-	case 3: 
+	case 3:
 		//menu ModificarActivos
 		ModificarActivos();
 		break;
@@ -198,9 +198,11 @@ void MenuUsuario(string Nombre_)
 		break;
 	case 5:
 		// menu ActivosRentados
+		ActivosRentados();
 		break;
 	case 6:
 		//menu MisActivosRentados
+		MisActivosRentados();
 		break;
 	case 7:
 		//Cerrar Sesion
@@ -208,7 +210,7 @@ void MenuUsuario(string Nombre_)
 		IniciarSesion();
 		break;
 	default:
-		//MenuUsuario(Nombre_);
+		MenuUsuario(Nombre_);
 		break;
 	}
 }
@@ -296,6 +298,7 @@ void RentarActivos()
 		cout << "Ingrese la cantidad de dias por rentar:" << endl;
 		string dias;
 		cin >> dias;
+		cout << endl;
 		//creo la transaccion
 		Transaccion *Nueva_Transaccion = new Transaccion(GenerarId(15), id, User->getUsuario(), User->getDepto(), User->getEmpresa(), fecha, dias);
 		//hay que rentar el activo
@@ -308,6 +311,47 @@ void RentarActivos()
 	{
 		MenuUsuario(User->getUsuario());
 	}
+}
+
+void ActivosRentados()
+{
+	system("cls");
+	cout << "---------------Activos Rentados---------------" << endl;
+	cout << endl;
+	Lista->Mostrar_Transacciones_de_Usuario(User->getUsuario());
+	cout << endl;
+	cout << "\t 1.- Registrar Devolucion" << endl;
+	cout << "\t 2.- Regresar a Menu" << endl;
+	cout << "----------------------------------------------" << endl;
+	string opcion;
+	cin >> opcion;
+	if (opcion == "1")
+	{
+		cout << "Ingrese el ID del Activo" << endl;
+		string id;
+		cin >> id;
+		//modificar la trasaccion
+		Lista->Registrar_Devolucion(id, User->getUsuario());
+		//hay que devolver el activo a disponible
+		Matriz->Devolver_Activo(id, User);
+		MenuUsuario(User->getUsuario());
+	}
+	else
+	{
+		MenuUsuario(User->getUsuario());
+	}
+}
+
+void MisActivosRentados()
+{
+	system("cls");
+	cout << "---------------Mis Activos Rentados---------------" << endl;
+	cout << endl;
+	User->Mostrar_Activos_Rentados();
+	cout << endl;
+	cout << "--------------------------------------------------" << endl;
+	system("pause");
+	MenuUsuario(User->getUsuario());
 }
 
 void MenuAdministrador()
@@ -348,12 +392,15 @@ void MenuAdministrador()
 		break;
 	case 5:
 		//Reportes Transacciones
+		Lista->graph();
+		MenuAdministrador();
 		break;
 	case 6:
 		//Reporte Activos de un usuario
 		break;
 	case 7:
 		//Reporte Activos rentados por un usuario
+
 		break;
 	case 8:
 		//Ordenar Transacciones

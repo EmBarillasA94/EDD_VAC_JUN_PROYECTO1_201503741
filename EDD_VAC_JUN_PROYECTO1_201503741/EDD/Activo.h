@@ -14,6 +14,9 @@ public:
 	string getId() {
 		return id;
 	}
+	string getNombre() {
+		return this->nombre;
+	}
 	string getDatos() {
 		string text = "ID = " + this->id + " ; Nombre = " + this->nombre + " ; Descripcion = " + this->descripcion;
 		return text;

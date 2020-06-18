@@ -80,6 +80,13 @@ public:
 	void Mostrar_Nodo_Act_Disponibles(Node_Arbol<A> *nodo);
 	void Rentar_Activo(string id_);
 	Node_Arbol<A> *Rentar_Activo_P(Node_Arbol<A> *nodo, string id_);
+	void Devolver_Activo(string id_);
+	Node_Arbol<A> *Devolver_Activo_P(Node_Arbol<A> *nodo, string id_);
+	A Buscar_Activo(string id_);
+	A Buscar_Act_P(Node_Arbol<A> *nodo, string id_);
+	void Mostrar_Activos_Rentados();
+	void Mostrar_Nodos_Activos_Rentados(Node_Arbol<A> *nodo);
+	void Nombre_Activo(string id_Act);
 	void Graph_Por_Usuario(string usuario_);
 	ofstream file;
 	void Escribir_Encabezado(string usuario_);

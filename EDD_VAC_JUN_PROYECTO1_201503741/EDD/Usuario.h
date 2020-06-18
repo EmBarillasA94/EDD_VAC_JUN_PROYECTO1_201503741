@@ -63,6 +63,15 @@ public:
 	void Rentar_Activo(string id_activo) {
 		this->ArbolAVL->Rentar_Activo(id_activo);
 	}
+	void Devolver_Activo(string id_activo) {
+		this->ArbolAVL->Devolver_Activo(id_activo);
+	}
+	void Nombre_Activo(string id_act) {
+		this->ArbolAVL->Nombre_Activo(id_act);
+	}
+	void Mostrar_Activos_Rentados() {
+		this->ArbolAVL->Mostrar_Activos_Rentados();
+	}
 private:
 	string usuario;
 	string nombre;
