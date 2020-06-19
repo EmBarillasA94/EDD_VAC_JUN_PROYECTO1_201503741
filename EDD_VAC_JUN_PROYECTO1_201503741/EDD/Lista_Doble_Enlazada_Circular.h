@@ -26,6 +26,10 @@ public:
 		return data;
 	}
 
+	void setData(T data_) {
+		this->data = data_;
+	}
+
 	void setNext(Node *n) {
 		next = n;
 	}
@@ -54,7 +58,7 @@ public:
 	void Registrar_Devolucion(string id_Activo, string usuario);
 	void graph();
 	void graph_por_Usuario(string usuario_, string empresa_, string depto_);
-
+	void OrdenarAscendente();
 private:
 	Node<T> *firts;
 	Node<T> *last;

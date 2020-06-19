@@ -218,3 +218,30 @@ void Lista_Doble_Enlazada_Circular<T>::graph_por_Usuario(string usuario_, string
 	system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Lista_Enlazada_Circular_por_Usuario.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Lista_Enlazada_Circular_por_Usuario.png");
 	system("C:\\Users\\EDDY\\Desktop\\Grafica_Lista_Enlazada_Circular_por_Usuario.png");
 }
+
+template<class T>
+void Lista_Doble_Enlazada_Circular<T>::OrdenarAscendente()
+{
+	Node<T> *P = this->firts;
+	Node<T> *aux = 0;
+	T Tran;
+	for (int i = 1; i < this->size; i++)//1
+	{
+		aux = P->getNext();
+		for (int j = 1; j < this->size; j++)//5-1=4    j=0
+		{
+			if (P->getData()->getId_Transaccion() > aux->getData()->getId_Transaccion())
+			{
+				Tran = aux->getData();
+				aux->setData(P->getData());
+				P->setData(Tran);
+			}
+			if (aux != this->last)
+			{
+				aux = aux->getNext();
+			}
+		}
+		P = P->getNext();
+	}
+	graph();
+}

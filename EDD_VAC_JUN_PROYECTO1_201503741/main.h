@@ -20,3 +20,4 @@ void ReporteActivosPorDepto();
 void ReporteActivosPorEmpresa();
 void ReporteActivosRentadosPorUsuario();
 void ReporteActivosDeUnUsuario();
+void OrdenarTrasacciones();

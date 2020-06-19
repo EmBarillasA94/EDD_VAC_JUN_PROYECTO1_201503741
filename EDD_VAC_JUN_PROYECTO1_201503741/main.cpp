@@ -83,7 +83,7 @@ void IniciarSesion()
 {
 	system("cls");
 	cout << "---------------RENTA DE ACTIVOS---------------" << endl;
-	cout << "\t 1.- Iniciar Sesión" << endl;
+	cout << "\t 1.- Iniciar Sesion" << endl;
 	cout << "\t 2.- Salir" << endl;
 	cout << "----------------------------------------------" << endl;
 	int opcion;
@@ -323,6 +323,7 @@ void ActivosRentados()
 	cout << "\t 1.- Registrar Devolucion" << endl;
 	cout << "\t 2.- Regresar a Menu" << endl;
 	cout << "----------------------------------------------" << endl;
+	cout << "Ingrese una opcion" << endl;
 	string opcion;
 	cin >> opcion;
 	if (opcion == "1")
@@ -408,6 +409,7 @@ void MenuAdministrador()
 		break;
 	case 8:
 		//Ordenar Transacciones
+		OrdenarTrasacciones();
 		break;
 	case 9:
 		//Cerrar Sesion
@@ -524,5 +526,25 @@ void ReporteActivosDeUnUsuario()
 	{
 		cout << "Usuario Invalido" << endl;
 		system("pause");
+	}
+}
+
+void OrdenarTrasacciones()
+{
+	cout << "\t 1.- Orden Ascendente" << endl;
+	cout << "\t 2.- Orden Desendente" << endl;
+	cout << "Ingrese una opcion" << endl;
+	int opcion;
+	cin >> opcion;
+	switch (opcion)
+	{
+	case 1:
+		Lista->OrdenarAscendente();
+		MenuAdministrador();
+		break;
+	case 2:
+		break;
+	default:
+		break;
 	}
 }
