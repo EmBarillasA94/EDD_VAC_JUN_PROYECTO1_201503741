@@ -415,24 +415,23 @@ void Matriz_Dispersa<N>::Nombre_Activo(string id_act)
 template<class N>
 void Matriz_Dispersa<N>::graph()
 {
-	NodeMatriz<N> *auxC = this->root;
-	NodeMatriz<N> *auxF = this->root;
-	char comillas = '"';
-	ofstream file;
-	file.open("C:\\Users\\EDDY\\Desktop\\Matriz.txt");
-	file << "digraph G { \n";
-	//file << "node[shape = box] \n";
+	NodeMatriz<N> *auxC = this->root; //auxC nos servira para reocrrer las columnas
+	NodeMatriz<N> *auxF = this->root; //auxF nos servira para recorrer las filas
+	char comillas = '"'; //caracter para agregar la doble comilla al archivo
+	ofstream file; //declamos el file que no servira para escribir el archivo
+	file.open("C:\\Users\\EDDY\\Desktop\\Matriz.txt");//inicializamos el file
+	file << "digraph G { \n"; //empezamos a ingresar el texto
 	file << "graph[nodesep = 1.0] \n";
 
-	//file << "rankdir=LR \n";
-	//filas
-	int grupo = 0;
-	while (auxF != 0)
+	
+	
+	int grupo = 0; //esta variable nos ayudara a colocar en grupos las columnas
+	while (auxF != 0)//filas
 	{
-
-		while (auxC != 0)
+		while (auxC != 0)//columnas
 		{
-			if (auxC->getData()->getUsuario() == "cabecera" || auxC->getData()->getUsuario() == "root")
+			//si el nodo en el que estamos no es una cabecero o la raiz lo declarmos de manera distinta
+			if (auxC->getData()->getUsuario() == "cabecera" || auxC->getData()->getUsuario() == "root") 
 			{
 				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getNombre() << comillas << ", color=red, group = " << comillas << auxC->getData()->getDepto() << comillas << " ]; \n";
 				auxC = auxC->getSiguiente();
@@ -442,7 +441,7 @@ void Matriz_Dispersa<N>::graph()
 				file << comillas << auxC->getData() << comillas << "[ shape = box3d, label = " << comillas << auxC->getData()->getInfo() << comillas << ", group = " << comillas << auxC->getData()->getDepto() << comillas << " ]; \n";
 				if (auxC != 0)
 				{
-					NodeMatriz<N> *auxZ = auxC;
+					NodeMatriz<N> *auxZ = auxC;//vamos a recorrer los nodos que se encuentran hacia atras
 					while (auxZ->getAtras() != 0)
 					{
 						auxZ = auxZ->getAtras();
@@ -480,13 +479,13 @@ void Matriz_Dispersa<N>::graph()
 		auxC = auxF;
 		if (auxC->getColumna() == "-1") {
 			file << "[dir=both]; \n";
-			//file << "; \n";
+			
 		}
 		else {
 
 			//file << "[constraint = same, dir=both]; \n";
 		}
-		/*grupo++;*/
+		
 		file << "{rank=same ";
 		auxC = auxF;
 		while (auxC != 0)
@@ -506,8 +505,7 @@ void Matriz_Dispersa<N>::graph()
 		auxF = auxF->getAbajo();
 	}
 
-	//columnas
-	//file << "rankdir= TB \n";
+	// recorro columnas
 	auxC = this->root;
 	auxF = this->root;
 	while (auxC != 0)
@@ -525,25 +523,48 @@ void Matriz_Dispersa<N>::graph()
 		}
 		file << "[dir=both]; \n \n";
 
-		////cod
-		//file << "{rank=same ";
-		//auxF = auxC;
-		//while (auxF != 0)
-		//{
-		//	file << comillas << auxF->getData() << comillas;
-		//	auxF = auxF->getAbajo();
-		//	if (auxF != 0)
-		//	{
-		//		file << " ";
-		//	}
-
-		//}
-		//file << "} \n \n";
-		//cod
 
 		auxC = auxC->getSiguiente();
 		auxF = auxC;
 	}
+
+	//recorro hacia atras
+	auxC = this->root;
+	auxF = this->root;
+	NodeMatriz<N> *auxZ = auxC;
+
+	while (auxF != 0)
+	{
+		//recorro una fila
+
+		while (auxC != 0)
+		{
+			//aca pregunto si hay nodos hacia atras
+			if (auxC->getAtras() != 0)
+			{
+				auxZ = auxC;
+				while (auxZ != 0)
+				{
+					file << comillas << auxZ->getData() << comillas;
+					auxZ = auxZ->getAtras();
+					if (auxZ != 0)
+					{
+						file << " -> ";
+					}
+
+				}
+				file << "[dir=both] \n";
+			}
+			auxC = auxC->getSiguiente();
+		}
+
+		
+		//cambio a auxF al siguiente de abajo
+		auxC = auxF;
+		auxC = auxC->getAbajo();
+		auxF = auxF->getAbajo();
+	}
+
 
 	file << "}";
 	file.close();
