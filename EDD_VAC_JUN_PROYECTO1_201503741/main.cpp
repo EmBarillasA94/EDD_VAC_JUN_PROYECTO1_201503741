@@ -386,9 +386,11 @@ void MenuAdministrador()
 		break;
 	case 3:
 		//Reporte Activos Disponibles de un departamento
+		ReporteActivosPorDepto();
 		break;
 	case 4:
 		//Reporte Activos Disponibles de una empresa
+		ReporteActivosPorEmpresa();
 		break;
 	case 5:
 		//Reportes Transacciones
@@ -397,11 +399,11 @@ void MenuAdministrador()
 		break;
 	case 6:
 		//Reporte Activos de un usuario
-
+		ReporteActivosDeUnUsuario();
 		break;
 	case 7:
 		//Reporte Activos rentados por un usuario
-		ReporteActivosPorUsuario();
+		ReporteActivosRentadosPorUsuario();
 		MenuAdministrador();
 		break;
 	case 8:
@@ -466,7 +468,25 @@ void CrearUsuarios()
 	}
 }
 
-void ReporteActivosPorUsuario()
+void ReporteActivosPorDepto()
+{
+	cout << "Ingrese el departamento:" << endl;
+	string depto;
+	cin >> depto;
+	Matriz->graph_por_Depto(depto);
+	MenuAdministrador();
+}
+
+void ReporteActivosPorEmpresa()
+{
+	cout << "Ingrese la empresa:" << endl;
+	string depto;
+	cin >> depto;
+	Matriz->graph_por_Empresa(depto);
+	MenuAdministrador();
+}
+
+void ReporteActivosRentadosPorUsuario()
 {
 	cout << endl;
 	cout << "Ingrese el usuario:" << endl;
@@ -479,4 +499,30 @@ void ReporteActivosPorUsuario()
 	string depto;
 	cin >> depto;
 	Lista->graph_por_Usuario(usu, emp, depto);
+}
+
+void ReporteActivosDeUnUsuario()
+{
+	cout << endl;
+	cout << "Ingrese el usuario:" << endl;
+	string usu;
+	cin >> usu;
+	cout << "Ingrese la empresa:" << endl;
+	string emp;
+	cin >> emp;
+	cout << "Ingrese el departamento:" << endl;
+	string depto;
+	cin >> depto;
+	Usuario *usuario = Matriz->BuscarUsuario2(depto, emp, usu);
+	if (usuario != 0)
+	{
+		//usuario encontrado
+		usuario->Graficar_Arbol_por_Usuario(usuario->getUsuario());
+		MenuAdministrador();
+	}
+	else
+	{
+		cout << "Usuario Invalido" << endl;
+		system("pause");
+	}
 }

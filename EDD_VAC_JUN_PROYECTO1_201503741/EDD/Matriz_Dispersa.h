@@ -91,11 +91,14 @@ public:
 	bool Insertar_en_columna(NodeMatriz<N> *cabecera, NodeMatriz<N> *nodo_nuevo_);
 	bool Insertar_Data_Atras(NodeMatriz<N> *nodo_inicial_, NodeMatriz<N> *data_);
 	N BuscarUsuario(string depto, string empresa, string usuario, string contrasenia);
+	N BuscarUsuario2(string depto, string empresa, string usuario);
 	void Mostrar_Activos_Disponibles(N usuario);
 	void Rentar_Activo(string id_Activo, N usuario);
 	void Devolver_Activo(string id_Activo, N usuario);
 	void Nombre_Activo(string id_act);
 	void graph();
+	void graph_por_Depto(string depto_);
+	void graph_por_Empresa(string empresa_);
 private:
 	NodeMatriz<N> *root;
 };

@@ -513,3 +513,93 @@ void Arbol_AVL<A>::Escribir_final()
 	system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Arbol_por_Usuario.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Arbol_por_Usuario.png");
 	system("C:\\Users\\EDDY\\Desktop\\Grafica_Arbol_por_Usuario.png");
 }
+
+template<class A>
+void Arbol_AVL<A>::getSubGraph(string iterador, string usuario, ofstream& file)
+{
+	//string subGrafo;
+	//string com = "" + '"' + "";
+	//subGrafo = subGrafo + "subgraph cluster_" + iterador + "{ \n";
+	//subGrafo = subGrafo + "node[shape=box, color=red] \n";
+	//subGrafo = subGrafo + com + usuario + com + "[label="usuario + "] \n";
+	//subGrafo = subGrafo + "node[shape=oval] \n";
+	//Node_Arbol<A> *aux = this->root;
+	//subGrafo = subGrafo + SubGraph_nodos(aux, subGrafo);
+	//subGrafo = subGrafo + com + usuario + com + "->" + com + this->root->getData() + com + " \n";
+	//aux = this->root;
+	//subGrafo = subGrafo + Enlazar_Nodos_SubGraph(aux, subGrafo);
+	//subGrafo = subGrafo + "}";
+	//return subGrafo;
+	char com = '"';
+	file << "subgraph cluster_" << iterador << "{ \n";
+	file << "node[shape=box, color=red] \n";
+	file << com << usuario << com << "[label=" << usuario << "] \n";
+	file << "node[shape=oval] \n";
+	Node_Arbol<A> *aux = this->root;
+	SubGraph_nodos(aux, file);
+	if (this->root != 0)
+	{
+		file << com << usuario << com << "->" << com << this->root->getData() << com << "\n";
+	}
+	aux = this->root;
+	Enlazar_Nodos_SubGraph(aux, file);
+	file << "}";
+}
+
+template<class A>
+void Arbol_AVL<A>::SubGraph_nodos(Node_Arbol<A>* raiz, ofstream& file)
+{
+	//if (raiz !=0)
+	//{
+	//	cadena = cadena + SubGraph_nodos(raiz->getLeft(), cadena);
+	//	cadena = cadena + SubGraph_nodos(raiz->getRight(), cadena);
+	//	return '"' + raiz->getData() + '"' + "[label=" + raiz->getData()->getInfo() + " \n";
+
+	//}
+	//return "";
+
+	if (raiz !=0)
+	{
+		SubGraph_nodos(raiz->getLeft(), file);
+		SubGraph_nodos(raiz->getRight(), file);
+		char com = '"';
+		file << com << raiz->getData() << com << "[label=" << raiz->getData()->getInfo() << "\n";
+
+	}
+}
+
+template<class A>
+void Arbol_AVL<A>::Enlazar_Nodos_SubGraph(Node_Arbol<A>* raiz, ofstream& file)
+{
+	/*if (raiz != 0)
+	{
+		Enlazar_Nodos_SubGraph(raiz->getLeft(), cadena);
+		Enlazar_Nodos_SubGraph(raiz->getRight(), cadena);
+		if (raiz->getLeft() != 0)
+		{
+			cadena = cadena + '"' + raiz->getData() + '"' + "->" + '"' + raiz->getLeft()->getData() + '"' + " \n";
+		}
+		if (raiz->getRight() != 0)
+		{
+			cadena = cadena + '"' + raiz->getData() + '"' + "->" + '"' + raiz->getRight()->getData() + '"' + " \n";
+		}
+		return cadena;
+	}
+	return "";*/
+
+	if (raiz != 0)
+	{
+		char com = '"';
+		if (raiz->getLeft() != 0)
+		{
+			file << com << raiz->getData() << com << "->" << com << raiz->getLeft()->getData() << com << "\n";
+		}
+		if (raiz->getRight() != 0)
+		{
+			file << com << raiz->getData() << com << "->" << com << raiz->getRight()->getData() << com << "\n";
+		}
+		Enlazar_Nodos_SubGraph(raiz->getLeft(),file);
+		Enlazar_Nodos_SubGraph(raiz->getRight(), file);
+	}
+}
+

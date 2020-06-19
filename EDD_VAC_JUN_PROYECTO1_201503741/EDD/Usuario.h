@@ -5,6 +5,7 @@
 #include "Activo.h"
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 class Usuario
@@ -71,6 +72,9 @@ public:
 	}
 	void Mostrar_Activos_Rentados() {
 		this->ArbolAVL->Mostrar_Activos_Rentados();
+	}
+	void getSubGraph(string iterador, std::ofstream& file) {
+		this->ArbolAVL->getSubGraph(iterador, this->usuario, file);
 	}
 private:
 	string usuario;

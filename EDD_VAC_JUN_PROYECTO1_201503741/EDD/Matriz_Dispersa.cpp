@@ -267,6 +267,71 @@ N Matriz_Dispersa<N>::BuscarUsuario(string depto, string empresa, string usuario
 }
 
 template<class N>
+N Matriz_Dispersa<N>::BuscarUsuario2(string depto, string empresa, string usuario)
+{
+	NodeMatriz<N> *aux = this->root;
+	//buscamos columna
+	while (aux != 0)
+	{
+		if (aux->getColumna() == depto)
+		{
+			//columna encontrada 
+			//salimos del ciclo
+			break;
+		}
+		else
+		{
+			aux = aux->getSiguiente();
+		}
+	}
+
+	//verificamos si recorrio todas las columnas y no la encontro
+	if (aux == 0)
+	{
+		return 0;
+	}
+
+	//buscamos la fila
+	while (aux != 0)
+	{
+		if (aux->getFila() == empresa)
+		{
+			//fila encontrada
+			//salimos del ciclo
+			break;
+		}
+		else
+		{
+			aux = aux->getAbajo();
+		}
+	}
+
+	//verificamos si recorrio tadas las filas y no la encontro
+	if (aux == 0)
+	{
+		return 0;
+	}
+
+	//en este punto estamos solo el nodo correspondiente a la fila y la columna
+	//busamos si el dato es el que buscamos o nos vamos hacia atras para buscar en los otros
+	while (aux != 0)
+	{
+		if (aux->getData()->getUsuario() == usuario)
+		{
+			//encontramos el dato
+			return aux->getData();
+		}
+		else
+		{
+			aux = aux->getAtras();
+		}
+	}
+
+	//si llega a este punto es decir que no lo encontro
+	return 0;
+}
+
+template<class N>
 void Matriz_Dispersa<N>::Mostrar_Activos_Disponibles(N usuario)
 {
 	NodeMatriz<N> *auxF = this->root;
@@ -485,4 +550,96 @@ void Matriz_Dispersa<N>::graph()
 
 	system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Matriz.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Matriz.png");
 	system("C:\\Users\\EDDY\\Desktop\\Grafica_Matriz.png");
+}
+
+template<class N>
+void Matriz_Dispersa<N>::graph_por_Depto(string depto_)
+{
+	//obtener la columna 
+	NodeMatriz<N> *auxC = Buscar_columna(depto_);
+	
+	if (auxC != 0)
+	{
+		char comillas = '"';
+		ofstream file;
+		file.open("C:\\Users\\EDDY\\Desktop\\Matriz_por_Depto.txt");
+		file << "digraph G { \n";
+		file << "label = " << depto_ << endl;
+		int iterador = 0;
+		while (auxC != 0)
+		{
+			//escribir subgrafos
+			if (auxC->getData()->getUsuario() != "cabecera")
+			{
+				auxC->getData()->getSubGraph(std::to_string(iterador), file);
+				if (auxC->getAtras() != 0)
+				{
+					NodeMatriz<N> *auxAtras = auxC->getAtras();
+					while (auxAtras != 0)
+					{
+						iterador++;
+						auxAtras->getData()->getSubGraph(std::to_string(iterador), file);
+						auxAtras = auxAtras->getAtras();
+					}
+				}
+			}
+			iterador++;
+			auxC = auxC->getAbajo();
+		}
+		file << "} \n";
+		file.close();
+
+		system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Matriz_por_Depto.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Matriz_por_Depto.png");
+		system("C:\\Users\\EDDY\\Desktop\\Grafica_Matriz_por_Depto.png");
+	}
+	else
+	{
+		cout << "El departamento no existe";
+	}
+}
+
+template<class N>
+void Matriz_Dispersa<N>::graph_por_Empresa(string empresa_)
+{
+	//buscar la fila
+	NodeMatriz<N> *auxF = Buscar_fila(empresa_);
+
+	if (auxF != 0)
+	{
+		char comillas = '"';
+		ofstream file;
+		file.open("C:\\Users\\EDDY\\Desktop\\Matriz_por_Depto.txt");
+		file << "digraph G { \n";
+		file << "label = " << empresa_ << endl;
+		int iterador = 0;
+		while (auxF != 0)
+		{
+			//escribir subgrafos
+			if (auxF->getData()->getUsuario() != "cabecera")
+			{
+				auxF->getData()->getSubGraph(std::to_string(iterador), file);
+				if (auxF->getAtras() != 0)
+				{
+					NodeMatriz<N> *auxAtras = auxF->getAtras();
+					while (auxAtras != 0)
+					{
+						iterador++;
+						auxAtras->getData()->getSubGraph(std::to_string(iterador), file);
+						auxAtras = auxAtras->getAtras();
+					}
+				}
+			}
+			iterador++;
+			auxF = auxF->getSiguiente();
+		}
+		file << "} \n";
+		file.close();
+
+		system("C:\\release\\bin\\dot.exe -Tpng C:\\Users\\EDDY\\Desktop\\Matriz_por_Depto.txt -o C:\\Users\\EDDY\\Desktop\\Grafica_Matriz_por_Depto.png");
+		system("C:\\Users\\EDDY\\Desktop\\Grafica_Matriz_por_Depto.png");
+	}
+	else
+	{
+		cout << "La empresa no existe";
+	}
 }

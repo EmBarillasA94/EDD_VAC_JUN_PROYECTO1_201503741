@@ -93,6 +93,9 @@ public:
 	void Graficar_nodos(Node_Arbol<A> *raiz);
 	void Enlazar_nodos(Node_Arbol<A> *raiz);
 	void Escribir_final();
+	void getSubGraph(string iterador, string usuario, ofstream& file);
+	void SubGraph_nodos(Node_Arbol<A> * raiz, ofstream& file);
+	void Enlazar_Nodos_SubGraph(Node_Arbol<A> * raiz, ofstream& file);
 private:
 	Node_Arbol<A> *root;
 };
