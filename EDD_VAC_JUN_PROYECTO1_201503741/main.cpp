@@ -543,6 +543,8 @@ void OrdenarTrasacciones()
 		MenuAdministrador();
 		break;
 	case 2:
+		Lista->OrdenarDesendente();
+		MenuAdministrador();
 		break;
 	default:
 		break;

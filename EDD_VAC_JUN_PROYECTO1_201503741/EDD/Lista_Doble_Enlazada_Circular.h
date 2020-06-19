@@ -59,6 +59,7 @@ public:
 	void graph();
 	void graph_por_Usuario(string usuario_, string empresa_, string depto_);
 	void OrdenarAscendente();
+	void OrdenarDesendente();
 private:
 	Node<T> *firts;
 	Node<T> *last;

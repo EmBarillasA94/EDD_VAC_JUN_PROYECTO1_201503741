@@ -245,3 +245,30 @@ void Lista_Doble_Enlazada_Circular<T>::OrdenarAscendente()
 	}
 	graph();
 }
+
+template<class T>
+void Lista_Doble_Enlazada_Circular<T>::OrdenarDesendente()
+{
+	Node<T> *P = this->firts;
+	Node<T> *aux = 0;
+	T Tran;
+	for (int i = 1; i < this->size; i++)//1
+	{
+		aux = P->getNext();
+		for (int j = 1; j < this->size; j++)//5-1=4    j=0
+		{
+			if (P->getData()->getId_Transaccion() < aux->getData()->getId_Transaccion())
+			{
+				Tran = aux->getData();
+				aux->setData(P->getData());
+				P->setData(Tran);
+			}
+			if (aux != this->last)
+			{
+				aux = aux->getNext();
+			}
+		}
+		P = P->getNext();
+	}
+	graph();
+}
